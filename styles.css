@@ -743,3 +743,20 @@ footer {
   .talent-card { width: 160px; }
   .talent-head { flex-direction: column; align-items: flex-start; }
 }
+
+/* =========================
+   ✅ CLEAN: NO VIGNETTE / NO DARKENING ANYWHERE
+   (Only affects showreel hero + media backgrounds; does not change layout)
+========================= */
+.reel-hero__scrim{ display:none !important; }
+
+.reel-hero{
+  background: transparent !important;
+}
+
+.reel-hero__media,
+.reel-hero__media iframe{
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
