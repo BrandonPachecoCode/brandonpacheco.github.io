@@ -26,6 +26,19 @@ body {
   --shadow: 0 24px 70px rgba(0,0,0,.18);
 }
 
+:root{
+  --subtitle: #FF8500; /* subtitles ONLY */
+}
+
+/* All subtitles under big titles */
+.subtitle,
+header p.subtitle,
+header > p,
+h1 + p,
+h2 + p{
+  color: var(--subtitle) !important;
+}
+
 /* Base */
 html, body{
   height: 100%;
