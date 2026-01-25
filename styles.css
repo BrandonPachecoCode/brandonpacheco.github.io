@@ -309,15 +309,7 @@ p {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 18px 60px rgba(0,0,0,0.55);
-   
-.hero-bubble .text{
-  margin-top: 120px;
-}
-   /* Push bio text box much lower (separate from chips) */
-.hero-bubble:not(.title){
-  margin-top: 80px;
-}
-   
+
   opacity: 0;
   transform: translateY(18px) scale(0.985);
   filter: blur(0);
@@ -327,32 +319,9 @@ p {
     transform 420ms cubic-bezier(.2, .9, .2, 1);
 }
 
-.hero-bubble.left{
-  align-self:flex-start;
-  border-top-left-radius: 6px;
-}
-
-.hero-bubble.right{
-  align-self:flex-end;
-  border-top-right-radius: 6px;
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-}
-
-.hero-bubble.dir-down{ transition-duration: 220ms, 420ms; }
-.hero-bubble.dir-up{ transition-duration: 140ms, 260ms; }
-
-.hero-bubble.is-in{
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  animation: bubblePop 520ms cubic-bezier(.2, .9, .2, 1) both;
-}
-
-.hero-bubble.dir-up.is-in{ animation-duration: 360ms; }
-
-.hero-bubble.is-out{
-  opacity: 0;
-  transform: translateY(18px) scale(0.985);
+/* Push bio text box lower (NOT chips) */
+.hero-bubble.bio{
+  margin-top: 80px;
 }
 
 @keyframes bubblePop{
