@@ -125,7 +125,8 @@ h1 {
 }
 
 /* Latest page subtitle (orange) */
-.latest h1 + p {
+h1 + p,
+h2 + p {
   color: var(--accent);
 }
 
