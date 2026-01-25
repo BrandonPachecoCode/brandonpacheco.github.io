@@ -745,18 +745,19 @@ footer {
 }
 
 /* =========================
-   ✅ CLEAN: NO VIGNETTE / NO DARKENING ANYWHERE
-   (Only affects showreel hero + media backgrounds; does not change layout)
-========================= */
-.reel-hero__scrim{ display:none !important; }
 
 .reel-hero{
-  background: transparent !important;
+  background: transparent; /* no black behind video */
 }
 
-.reel-hero__media,
 .reel-hero__media iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  border: 0;
+  pointer-events: none;
   filter: none !important;
   opacity: 1 !important;
-  mix-blend-mode: normal !important;
 }
