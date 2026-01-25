@@ -312,6 +312,11 @@ p {
 .hero-bubble .text{
   margin-top: 32px;
 }
+   /* Push bio text box much lower (separate from chips) */
+.hero-bubble:not(.title){
+  margin-top: 80px;
+}
+   
   opacity: 0;
   transform: translateY(18px) scale(0.985);
   filter: blur(0);
