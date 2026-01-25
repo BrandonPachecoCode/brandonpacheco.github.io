@@ -878,3 +878,89 @@ footer {
     flex-wrap: wrap !important;
   }
 }
+/* =========================
+   iPHONE HERO BUBBLES — match your mock
+   (PASTE AT VERY BOTTOM)
+========================= */
+@media (max-width: 600px){
+
+  /* Keep overlay pinned to the photo (top → bottom) */
+  .hero-overlay{
+    position: absolute !important;
+    inset: 0 !important;
+    transform: none !important;
+    padding: 14px !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+  }
+
+  /* Make the bubble stack fill the image so we can push items apart */
+  .hero-bubbles{
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;                /* ✅ key */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important; /* chips top, bio bottom */
+    gap: 0 !important;
+  }
+
+  /* ---------- TITLE CHIPS (TOP) ---------- */
+  .hero-bubble.title{
+    align-self: center !important;
+    margin-top: 6px !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    flex-wrap: wrap !important;        /* ✅ wrap instead of overflow */
+    justify-content: center !important;
+    gap: 8px !important;
+
+    opacity: 1 !important;             /* keep visible */
+    transform: none !important;
+  }
+
+  .title-chip{
+    font-size: 0.72rem !important;
+    padding: 8px 10px !important;
+    letter-spacing: 0.03em !important;
+    border-radius: 999px !important;
+  }
+
+  /* ---------- BIO BOX (BOTTOM) ---------- */
+  .hero-bubble:not(.title){
+    align-self: center !important;
+    margin: 0 !important;
+
+    width: 92% !important;
+    max-width: 92% !important;
+
+    /* smaller + sits low */
+    padding: 12px 14px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.35 !important;
+
+    /* ✅ keep it low like your mock */
+    margin-bottom: 14px !important;
+
+    /* ✅ stop it covering the whole image */
+    max-height: 34% !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+
+    background: rgba(0,0,0,0.48) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    backdrop-filter: blur(10px) !important;
+
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Remove any old pushes that were moving it weirdly */
+  .hero-bubble .text{ margin-top: 0 !important; }
+  .hero-bubble:not(.title){ margin-top: 0 !important; }
+}
