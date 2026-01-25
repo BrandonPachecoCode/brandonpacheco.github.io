@@ -124,6 +124,11 @@ h1 {
   font-size: 1.05rem;
 }
 
+/* Latest page subtitle (orange) */
+.latest h1 + p {
+  color: var(--accent);
+}
+
 h2 {
   margin: 0 0 1rem;
   font-size: 1.25rem;
