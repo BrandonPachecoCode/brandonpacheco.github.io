@@ -231,7 +231,7 @@ p {
   padding: clamp(1.6rem, 4vw, 3rem);
   z-index:2;
   pointer-events:none;
-  transform: translateY(-28%);
+  transform: translateY(15%);
 }
 
 /* Bubble stack */
