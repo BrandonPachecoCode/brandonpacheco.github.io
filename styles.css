@@ -149,9 +149,18 @@ h2 {
   letter-spacing: -0.01em;
 }
 
-p {
-  color: rgba(245, 245, 245, 0.78);
-  margin: 0 0 1rem;
+/* DEFAULT TEXT = ORANGE */
+body {
+  color: #FF8500;
+}
+
+/* TITLES & HEADINGS = BLACK */
+h1,
+h2,
+h3,
+.title,
+.work-title {
+  color: var(--text); /* black */
 }
 
 /* =========================
