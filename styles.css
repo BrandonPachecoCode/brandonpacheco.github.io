@@ -731,90 +731,150 @@ footer {
    MOBILE
 ========================= */
 /* =========================
-   iPHONE FIX: FULLSCREEN REEL (NO BLACK BARS) + SMALLER BUBBLES
-   Paste at END of styles.css
+   iPHONE / MOBILE FIXES
+   (PASTE AT VERY BOTTOM OF styles.css)
 ========================= */
+@media (max-width: 600px){
 
-:root{
-  --navH: 64px; /* matches your fixed nav height */
-}
+  /* -------------------------
+     1) TOP NAV (keep it stable)
+  -------------------------- */
+  .top-nav{
+    height: 64px;
+  }
 
-/* 1) Make the reel hero exactly the viewport (minus nav), no extra black area */
-.reel-hero{
-  height: calc(100vh - var(--navH)) !important;
-  min-height: calc(100vh - var(--navH)) !important;
-  padding-top: 0 !important;        /* remove the old padding-based layout */
-  background: transparent !important;
-  overflow: hidden !important;
-  position: relative !important;
-}
+  body{
+    padding-top: 64px; /* keep space for fixed nav */
+  }
 
-/* Make the iframe behave like a “cover video” */
-.reel-hero__media{
-  position: absolute !important;
-  inset: 0 !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 0 !important;
-  overflow: hidden !important;
-}
+  /* -------------------------
+     2) VIDEO HERO (Show FULL frame)
+     - No crop (no zoom)
+     - Any leftover space matches site bg, not black
+  -------------------------- */
 
-/* Cover technique for YouTube iframe (kills black bars) */
-.reel-hero__media iframe{
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
+  /* Container */
+  .reel-hero{
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 64px !important; /* ensure video starts under nav */
+    background: var(--bg) !important;
+    overflow: hidden;
+  }
 
-  /* cover the container like object-fit: cover */
-  width: 100vw !important;
-  height: 56.25vw !important;     /* 16:9 */
-  min-width: 177.78vh !important; /* 16:9 cover fallback */
-  min-height: 100% !important;
+  /* If your markup uses .reel-hero__media */
+  .reel-hero__media{
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 9;        /* full YouTube frame */
+    background: var(--bg) !important;
+    overflow: hidden !important;
+  }
 
-  transform: translate(-50%, -50%) !important;
-  border: 0 !important;
-  filter: none !important;
-  opacity: 1 !important;
-  pointer-events: none !important;
-}
+  .reel-hero__media iframe{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;  /* IMPORTANT: stops zoom/crop */
+    border: 0 !important;
+    pointer-events: none;
+  }
 
-/* Ensure your hero (photo section) starts right after the reel, no weird gaps */
-.hero{
-  margin-top: 0 !important;
-  padding-top: 1rem !important;
-}
+  /* If your markup uses .reel-hero__media without __media wrapper, also protect this: */
+  .reel-hero iframe{
+    transform: none !important;
+  }
 
-/* 2) iPhone bubble sizing so chips/bubble fit */
-@media (max-width: 480px){
+  /* -------------------------
+     3) HERO IMAGE + BUBBLES
+     - Smaller chips
+     - Allow wrap (they currently overflow)
+     - Bio bubble scrolls instead of covering photo
+  -------------------------- */
 
-  /* keep overlay centered, but not too high */
+  .hero{
+    padding-top: 0.75rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  .hero-photo{
+    border-radius: 18px !important;
+  }
+
+  /* Overlay placement */
   .hero-overlay{
-    transform: translateY(-2%) !important;
-    padding: 1rem !important;
-  }
-
-  /* chips smaller */
-  .title-chip{
-    font-size: 0.72rem !important;
-    padding: 8px 10px !important;
-    letter-spacing: 0.06em !important;
-  }
-
-  /* allow chips to wrap on iPhone (otherwise they overflow) */
-  .hero-bubble.title{
-    flex-wrap: wrap !important;
-    white-space: normal !important;
-    gap: 10px !important;
+    transform: none !important;            /* remove desktop translate */
+    align-items: flex-start !important;    /* start from top */
     justify-content: center !important;
+    padding: 12px !important;
+    padding-top: 18px !important;
   }
 
-  /* bio bubble smaller + narrower so it fits */
-  .hero-bubble{
+  .hero-bubbles{
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  /* Title row (chips) */
+  .hero-bubble.title{
+    flex-wrap: wrap !important;       /* allow wrap */
+    white-space: normal !important;
+    gap: 8px !important;
+    justify-content: center !important;
+    max-width: 100% !important;
+  }
+
+  .title-chip{
+    font-size: 0.70rem !important;
+    padding: 8px 10px !important;
+    letter-spacing: 0.03em !important;
+    border-radius: 999px !important;
+  }
+
+  /* Bio bubble (text box) */
+  .hero-bubble:not(.title){
+    margin-top: 8px !important;
     max-width: 92% !important;
     padding: 12px 14px !important;
-    font-size: 0.88rem !important;
-    line-height: 1.45 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.35 !important;
+
+    /* key fix: stop it taking over the whole photo */
+    max-height: 36vh !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+
+    /* keep it readable */
+    background: rgba(0,0,0,0.50) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+  }
+
+  /* If you have .hero-bubble .text wrapper */
+  .hero-bubble .text{
+    margin-top: 0 !important; /* remove any big pushes */
+  }
+
+  /* -------------------------
+     4) OPTIONAL: Make the “reel hero card” not huge on mobile
+     (the box that says Brandon Pacheco + buttons)
+  -------------------------- */
+  .reel-hero__content{
+    padding: 14px !important;
+  }
+
+  .reel-hero__card{
+    width: 100% !important;
+    max-width: 520px !important;
+    border-radius: 18px !important;
+  }
+
+  .reel-hero__title{
+    font-size: 1.9rem !important;
+  }
+
+  .reel-hero__actions{
+    gap: 10px !important;
+    flex-wrap: wrap !important;
   }
 }
