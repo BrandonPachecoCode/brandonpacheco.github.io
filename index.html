@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandon Pacheco — Showreel</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* =========================
+       FULLSCREEN SHOWREEL HERO (NEW)
+    ========================= */
+    .reel-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      /* accounts for fixed nav so video doesn't hide under it */
+      padding-top: 64px;
+      box-sizing: border-box;
+    }
+
+    .reel-hero__media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Make iframe behave like a cover video */
+    .reel-hero__media iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120vw;
+      height: 120vh;
+      transform: translate(-50%, -50%);
+      border: 0;
+      pointer-events: none; /* keeps it feeling like a background */
+    }
+
+    /* Premium scrims (readability + cinematic) */
+    .reel-hero__scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(1100px 700px at 50% 35%, rgba(0,0,0,0.25), rgba(0,0,0,0.70) 78%),
+        linear-gradient(to bottom, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+    }
+
+    .reel-hero__content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .reel-hero__card {
+      width: min(1100px, 92vw);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.25rem;
+
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 22px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.65);
+    }
+
+    .reel-hero__title {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: rgba(255,255,255,0.98);
+      font-weight: 850;
+    }
+
+    .reel-hero__subtitle {
+      margin: 0.35rem 0 0;
+      color: rgba(255,255,255,0.72);
+      max-width: 56ch;
+      font-size: 0.98rem;
+    }
+
+    .reel-hero__actions {
+      display: flex;
+      gap: 10px;
+      flex: 0 0 auto;
+      pointer-events: auto; /* clickable */
+    }
+
+    .reel-hero__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0.75rem 1.05rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.25);
+      color: rgba(255,255,255,0.95);
+      transition: transform .18s ease, background .18s ease, opacity .18s ease;
+    }
+
+    .reel-hero__btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.10);
+    }
+
+    .reel-hero__btn--primary {
+      background: rgba(255,255,255,0.92);
+      color: #0b0b0b;
+      border-color: rgba(0,0,0,0.12);
+    }
+
+    .reel-hero__btn--primary:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.96);
+    }
+
+    .reel-hero__scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .reel-hero__dot {
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      animation: scrollPulse 1.2s infinite ease-in-out;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: translateY(0); opacity: .45; }
+      50% { transform: translateY(4px); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .reel-hero {
+        min-height: 620px;
+      }
+      .reel-hero__media iframe {
+        width: 160vw;
+        height: 120vh;
+      }
+      .reel-hero__card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* --- HERO PHOTO + CHAT BUBBLES (overlay only) --- */
+    .hero {
+      width: min(1100px, 92vw);
+      margin: 2.2rem auto 1.2rem;
+      position: relative;
+    }
+
+    .hero-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: none !important;
+      opacity: 1 !important;
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 620px at 50% 52%, rgba(0,0,0,0.10), rgba(0,0,0,0.12) 58%, rgba(0,0,0,0.18) 100%),
+        linear-gradient(to top, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 45%, rgba(0,0,0,0.00) 100%);
+      pointer-events: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1.1rem, 3.5vw, 2.2rem);
+      transform: translateY(5%); /* move DOWN: increase this % */
+    }
+
+    .hero-bubbles {
+      width: min(740px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-bubble {
+      max-width: 92%;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.95);
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.50);
+
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      filter: blur(10px);
+      will-change: opacity, transform, filter;
+    }
+
+    .hero-bubble.left { align-self: flex-start; border-top-left-radius: 7px; }
+    .hero-bubble.right {
+      align-self: flex-end;
+      border-top-right-radius: 7px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.98);
+    }
+
+    .hero-bubble.title{
+      align-self: center;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      max-width: none !important;
+    }
+
+    .title-chip{
+      flex: 0 0 auto;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 36px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      color: #0b0b0b;
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .hero-bubble .typing {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 0;
+    }
+
+    .hero-bubble .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      opacity: 0.35;
+      animation: typingPulse 0.9s infinite ease-in-out;
+    }
+    .hero-bubble .dot:nth-child(2){ animation-delay: .12s; }
+    .hero-bubble .dot:nth-child(3){ animation-delay: .24s; }
+
+    @keyframes typingPulse {
+      0%, 100% { transform: translateY(0); opacity: 0.35; }
+      50%      { transform: translateY(-3px); opacity: 0.95; }
+    }
+
+    .hero-bubble.is-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      animation: bubblePop 520ms cubic-bezier(.2,.9,.2,1) both;
+    }
+
+    @keyframes bubblePop {
+      0%   { transform: translateY(18px) scale(0.98); }
+      70%  { transform: translateY(-2px) scale(1.02); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .hero-bubble.is-typing .typing { display: inline-flex; }
+    .hero-bubble.is-typing .text { display: none; }
+
+    .hero-bubble.is-out {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      filter: blur(10px);
+      transition: opacity 220ms ease, transform 220ms ease, filter 220ms ease;
+      animation: none;
+    }
+
+    /* ✅ PREMIUM BIO (ONE BIG BUBBLE) */
+    .hero-bubble.bio {
+      align-self: center;
+      max-width: 740px;
+      padding: 22px 24px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.55));
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 26px 90px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.06);
+      letter-spacing: 0.01em;
+    }
+
+    .bio-text {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-link active">Showreel</a>
+  <a href="talent.html" class="nav-link">Talent</a>
+  <a href="brands.html" class="nav-link">Brands</a>
+  <a href="updates.html" class="nav-link">Latest</a>
+</nav>
+
+<!-- ✅ NEW: FULLSCREEN SHOWREEL FIRST -->
+<section class="reel-hero" aria-label="Showreel hero">
+  <div class="reel-hero__media" aria-hidden="true">
+    <!-- Replace YOUR_YOUTUBE_ID with your video ID -->
+    <iframe
+      src="https://www.youtube.com/embed/zSalqXWohbg?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=zSalqXWohbg&modestbranding=1&rel=0"
+      title="Showreel Background"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="reel-hero__scrim" aria-hidden="true"></div>
+
+  <div class="reel-hero__content">
+    <div class="reel-hero__card">
+      <div>
+        <h1 class="reel-hero__title">Brandon Pacheco</h1>
+      </div>
+
+      <div class="reel-hero__actions">
+        <a class="reel-hero__btn reel-hero__btn--primary" href="#hero">View Profile</a>
+        <a class="reel-hero__btn" href="#reel">Open Showreel</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="reel-hero__scroll" aria-hidden="true">
+    <span class="reel-hero__dot"></span> Scroll
+  </div>
+</section>
+
+<!-- Your PHOTO HERO -->
+<section id="hero" class="hero" aria-label="Brandon Pacheco">
+  <div class="hero-photo">
+    <img src="images/brandon%20pacheco.png" alt="Brandon Pacheco">
+
+    <div class="hero-overlay">
+      <div class="hero-bubbles">
+
+        <div class="hero-bubble title" data-delay="120" aria-hidden="true">
+          <span class="title-chip">Director</span>
+          <span class="title-chip">Producer</span>
+          <span class="title-chip">Postproducer</span>
+          <span class="title-chip">Creative Development</span>
+        </div>
+
+        <div class="hero-bubble bio" data-delay="220" aria-hidden="true">
+          <span class="typing" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </span>
+
+          <div class="text">
+            <p class="bio-text">
+              Brandon Pacheco is a director & producer working across branded content and digital projects, specialising in storytelling.
+              He works hands-on from early ideas through production and post, shaping projects from concept to final cut.
+              Collaborative by nature, Brandon partners with brands, agencies, and creative teams to create work that feels considered,
+              visually strong, and built for real audiences.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="container">
+  <h2>Contact</h2>
+  <a class="button" href="mailto:brandonchopas@icloud.com">
+    brandonchopas@icloud.com
+  </a>
+</section>
+
+<footer>
+  <p>© 2026 Brandon Pacheco</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

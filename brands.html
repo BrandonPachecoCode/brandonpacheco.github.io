@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brandon Pacheco — Brands</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Page-specific overrides (so this works even if styles.css is cached) -->
+  <style>
+    /* ---- BRANDS: make logos bigger + keep layout clean ---- */
+    .brands-grid{
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+      gap: 2.2rem 2rem !important;
+    }
+
+    .brands-grid img{
+      max-width: 330px !important;
+      max-height: 156px !important;
+      padding: 22px 26px !important;
+      border-radius: 18px !important;
+    }
+
+    /* ---- MODAL: portrait default + landscape mode for YouTube / flagged items ---- */
+    .video-modal-content{
+      width: min(92vw, 420px);
+      aspect-ratio: 9 / 16;
+      background: #000;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.8);
+    }
+
+    .video-modal-content.landscape{
+      width: min(92vw, 980px);
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-frame{ width: 100%; height: 100%; }
+    .video-frame iframe{ width: 100%; height: 100%; border: 0; display:block; }
+
+    /* ✅ REQUIRED: modal show/hide */
+    .video-modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.86);
+      display: none;                 /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+    }
+    .video-modal.active{ display: flex; }
+
+    .video-close{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-link">Showreel</a>
+  <a href="talent.html" class="nav-link">Talent</a>
+  <a href="brands.html" class="nav-link active">Brands</a>
+  <a href="updates.html" class="nav-link">Latest</a>
+</nav>
+
+<header class="container">
+  <h1>Brands</h1>
+  <p class="subtitle">Brands I’ve worked with.</p>
+</header>
+
+<main class="container brands-page">
+  <div class="brands-grid">
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C06-lMvoay8/">
+      <div class="brand-item"><img src="logos/AARDMAN.png" alt="Aardman"><span class="brand-name">Aardman</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/CyBfcSGtN7G/">
+      <div class="brand-item"><img src="logos/ADIDAS.png" alt="Adidas"><span class="brand-name">Adidas</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DDFWSKWNGGU/">
+      <div class="brand-item"><img src="logos/GOOGLE.png" alt="Google"><span class="brand-name">Google</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DEFQuGOIX-w/">
+      <div class="brand-item"><img src="logos/HELLO%20FRESH.png" alt="HelloFresh"><span class="brand-name">HelloFresh</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DMQUysXIRP0/">
+      <div class="brand-item"><img src="logos/APPLE.png" alt="Apple"><span class="brand-name">Apple</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C3F3P39ocMy/">
+      <div class="brand-item"><img src="logos/BBC.png" alt="BBC"><span class="brand-name">BBC</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DLkijNYo1Pi/">
+      <div class="brand-item"><img src="logos/CHEEZ%20IT.png" alt="Cheez-It"><span class="brand-name">Cheez-It</span></div>
+    </a>
+
+    <a class="brand-link" href="#"
+       data-video="https://www.youtube.com/watch?v=063FqEfBTns"
+       data-orientation="landscape">
+      <div class="brand-item">
+        <img src="logos/CHICKEN%20SHOP%20DATE.png" alt="Chicken Shop Date">
+        <span class="brand-name">Chicken Shop Date</span>
+      </div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DR4tv4viD6X/">
+      <div class="brand-item"><img src="logos/VOLVO.png" alt="Volvo"><span class="brand-name">Volvo</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C_U-qBbuzJd/">
+      <div class="brand-item"><img src="logos/COMFORT%20CASES.png" alt="Comfort Cases"><span class="brand-name">Comfort Cases</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DQOe8tajP5D/">
+      <div class="brand-item"><img src="logos/DISNEY.png" alt="Disney"><span class="brand-name">Disney</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DL5OrTTIT_h/">
+      <div class="brand-item"><img src="logos/AMERICAN%20EXPRESS.png" alt="American Express"><span class="brand-name">American Express</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DQgnmRfjS18/">
+      <div class="brand-item"><img src="logos/EPIC%20GAMES.png" alt="Epic Games"><span class="brand-name">Epic Games</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7j-kYpt5w1/">
+      <div class="brand-item"><img src="logos/LEGO.png" alt="LEGO"><span class="brand-name">LEGO</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCzbrn7tGmG/">
+      <div class="brand-item"><img src="logos/TESCO.png" alt="Tesco" /><span class="brand-name">Tesco</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DNgPKlmI9PB/">
+      <div class="brand-item"><img src="logos/STAEDTLER.png" alt="STAEDTLER" /><span class="brand-name">STAEDTLER</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DHL_BcpIcNg/">
+      <div class="brand-item"><img src="logos/CRUFTS.png" alt="Crufts"><span class="brand-name">Crufts</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DKEjAR8o9hC/">
+      <div class="brand-item"><img src="logos/DAIRYLEA.png" alt="Dairylea"><span class="brand-name">Dairylea</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7YrW0xMfvM/">
+      <div class="brand-item"><img src="logos/DEICHMANN.png" alt="Deichmann"><span class="brand-name">Deichmann</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DKpU-lBNwze/">
+      <div class="brand-item"><img src="logos/HAPPY%20MUM%20HAPPY%20BABY.png" alt="HAPPY MUM HAPPY BABY"><span class="brand-name">HAPPY MUM HAPPY BABY</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DPjaD9PiJlJ/">
+      <div class="brand-item"><img src="logos/DELIVEROO.png" alt="Deliveroo"><span class="brand-name">Deliveroo</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DJtMkccMuHU/">
+      <div class="brand-item"><img src="logos/ANCIENT%20%26%20BRAVE.png" alt="Ancient & Brave"><span class="brand-name">Ancient & Brave</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C22lBJEt-Gd/">
+      <div class="brand-item"><img src="logos/888%20POKER.png" alt="888 Poker"><span class="brand-name">888 Poker</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DNfUnx8s2pR/">
+      <div class="brand-item"><img src="logos/COTTON%20TRADERS.png" alt="Cotton Traders"><span class="brand-name">Cotton Traders</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCmkFeUNIlF/">
+      <div class="brand-item"><img src="logos/DREAMTOYS.png" alt="DreamToys"><span class="brand-name">DreamToys</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCPLwZiIa5N/">
+      <div class="brand-item"><img src="logos/GARNIER.png" alt="Garnier"><span class="brand-name">Garnier</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C84sKlctwQ9/">
+      <div class="brand-item"><img src="logos/ZARBEES.png" alt="Zarbee’s"><span class="brand-name">Zarbee’s</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DMA-gILtg05/">
+      <div class="brand-item"><img src="logos/HAPPY%20PLACE.png" alt="Happy Place"><span class="brand-name">Happy Place</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C5Bq677tv3x/">
+      <div class="brand-item"><img src="logos/INVISILIGN.png" alt="Invisalign"><span class="brand-name">Invisalign</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DIJ6pvPIgZ_/">
+      <div class="brand-item"><img src="logos/NIP%20%2B%20FAB.png" alt="NIP+FAB"><span class="brand-name">NIP+FAB</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7jw3sCI04-/">
+      <div class="brand-item"><img src="logos/REGATTA.png" alt="Regatta"><span class="brand-name">RegATTA</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DOWWds9jTnj/">
+      <div class="brand-item"><img src="logos/ROCKS.png" alt="Rocks"><span class="brand-name">Rocks</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.youtube.com/watch?v=eO0FUfOgP98">
+      <div class="brand-item"><img src="logos/SANTANDER.png" alt="Santander"><span class="brand-name">Santander</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DKoePGXo24X/">
+      <div class="brand-item"><img src="logos/TOUGH%20MUDDER.png" alt="Tough Mudder"><span class="brand-name">Tough Mudder</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DHLdCDhMlVw/">
+      <div class="brand-item"><img src="logos/TRINNY%20LONDON.png" alt="Trinny London"><span class="brand-name">Trinny London</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCFFZq9N2ol/">
+      <div class="brand-item"><img src="logos/UNILEVER.png" alt="Unilever"><span class="brand-name">Unilever</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DRtx1EyDKxh/">
+      <div class="brand-item"><img src="logos/VAX.png" alt="VAX"><span class="brand-name">VAX</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/C9AfO4pInnB/">
+      <div class="brand-item"><img src="logos/VODAFONE.png" alt="Vodafone"><span class="brand-name">Vodafone</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7Uab61NuVU/">
+      <div class="brand-item"><img src="logos/WHICH.png" alt="Which?"><span class="brand-name">Which?</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C8e8vbDIS0K/">
+      <div class="brand-item"><img src="logos/WILD%20NUTRITION.png" alt="Wild Nutrition"><span class="brand-name">Wild Nutrition</span></div>
+    </a>
+
+    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCUennVIYAp/">
+      <div class="brand-item"><img src="logos/FOODSPRING.png" alt="foodSpring"><span class="brand-name">foodSpring</span></div>
+    </a>
+
+  </div>
+</main>
+
+<!-- Video Modal -->
+<div id="video-modal" class="video-modal" aria-hidden="true">
+  <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="video-close" aria-label="Close video" type="button">×</button>
+    <div class="video-frame"></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Brandon Pacheco</p>
+</footer>
+
+<script>
+  const modal = document.getElementById("video-modal");
+  const modalContent = modal.querySelector(".video-modal-content");
+  const frame = modal.querySelector(".video-frame");
+  const closeBtn = modal.querySelector(".video-close");
+
+  function toYouTubeEmbed(url) {
+    if (url.includes("youtube.com")) {
+      const id = url.split("v=")[1]?.split("&")[0];
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : url;
+    }
+    if (url.includes("youtu.be")) {
+      const id = url.split("youtu.be/")[1]?.split("?")[0];
+      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : url;
+    }
+    return url;
+  }
+
+  function toInstagramEmbed(url) {
+    const clean = url.split("?")[0];
+    if (clean.includes("instagram.com")) {
+      const base = clean.endsWith("/") ? clean : clean + "/";
+      return `${base}embed/`;
+    }
+    return url;
+  }
+
+  function openModal(embedUrl, orientation) {
+    modalContent.classList.toggle("landscape", orientation === "landscape");
+
+    frame.innerHTML = `
+      <iframe
+        src="${embedUrl}"
+        title="Video"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    `;
+
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    frame.innerHTML = "";
+    modalContent.classList.remove("landscape");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".brand-link").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+
+      const url = link.dataset.video;
+      if (!url) return;
+
+      const isYouTube = url.includes("youtube.com") || url.includes("youtu.be");
+      const isIG = url.includes("instagram.com");
+
+      const orientation =
+        (link.dataset.orientation === "landscape" || link.dataset.orientation === "portrait")
+          ? link.dataset.orientation
+          : (isYouTube ? "landscape" : "portrait");
+
+      let embedUrl = url;
+      if (isYouTube) embedUrl = toYouTubeEmbed(url);
+      if (isIG) embedUrl = toInstagramEmbed(url);
+
+      openModal(embedUrl, orientation);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+</script>
+
+</body>
+</html>
