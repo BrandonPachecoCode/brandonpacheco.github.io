@@ -73,6 +73,11 @@ body{
   height: 64px;
   z-index: 1000;
 
+
+   body{
+  padding-top: 64px; /* space for fixed top nav */
+}
+
   display: flex;
   align-items: center;
   justify-content: center;
