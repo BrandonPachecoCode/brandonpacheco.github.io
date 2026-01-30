@@ -703,32 +703,6 @@ footer {
 .talent-page .container{
   padding-bottom: 1.5rem; /* was 4rem */
 }
-/* =========================================
-   MOVE TALENT + BRANDS UP (OVERRIDE)
-   Paste at VERY BOTTOM of styles.css
-========================================= */
-
-/* Talent page: reduce the big container padding around the talent block */
-.container:has(.talent-viewport){
-  padding-top: 2rem !important;     /* was 4rem */
-  padding-bottom: 1.5rem !important; /* was 4rem */
-}
-
-/* Also pull the carousel up a touch (optional, but helps) */
-.talent-viewport{
-  margin-top: -2.5rem !important;
-}
-
-/* Brands page: reduce the big container padding around the brands block */
-.container:has(.brands-grid){
-  padding-top: 2rem !important;     /* was 4rem */
-  padding-bottom: 2rem !important;  /* was 4rem */
-}
-
-/* And pull brands block slightly up (optional) */
-.brands-page{
-  margin-top: 0.5rem !important;
-}
 /* =========================
    MOBILE
 ========================= */
