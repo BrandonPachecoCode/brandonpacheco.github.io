@@ -434,7 +434,7 @@ h3,
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding-top: 2.5rem;
 }
