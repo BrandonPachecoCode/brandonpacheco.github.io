@@ -3,28 +3,6 @@
 ========================= */
 * { box-sizing: border-box; }
 
-/* Base */
-html, body{
-  height: 100%;
-}
-
-/* ✅ SINGLE BODY RULE (keeps text orange + pushes content below fixed nav) */
-body{
-  margin: 0;
-  min-height: 100%;
-  background: var(--bg);
-
-  /* TEXT */
-  color: #FF8500; /* default text ORANGE */
-
-  /* FONT */
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
-               Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-
-  /* ✅ FIX FOR FIXED NAV */
-  padding-top: 64px;
-}
-
 /* =========================
    BRANDON — COLOR SYSTEM
 ========================= */
@@ -36,10 +14,20 @@ body{
   --text-muted: rgba(11,11,11,.65);
   --stroke: rgba(11,11,11,.10);
   --shadow: 0 24px 70px rgba(0,0,0,.18);
+  --subtitle: #FF8500;  /* subtitles ONLY */
 }
 
-:root{
-  --subtitle: #FF8500; /* subtitles ONLY */
+/* Base */
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: #FF8500; /* DEFAULT ORANGE */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
+               Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  padding-top: 64px; /* space for fixed nav */
 }
 
 /* All subtitles under big titles */
@@ -51,17 +39,44 @@ h2 + p{
   color: var(--subtitle) !important;
 }
 
-/* “Window” surface helper (cards/sections) */
-.window{
-  background: var(--window);
-  border: 1px solid var(--stroke);
-  border-radius: 26px;
-  box-shadow: var(--shadow);
+/* =========================
+   TOP NAV (menu accent)
+========================= */
+.top-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  background: rgba(224,230,226,.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--stroke);
 }
 
-/* Accent utility */
-.accent{
-  color: var(--accent);
+.nav-link{
+  text-decoration: none;
+  font-weight: 800;
+  color: rgba(11,11,11,.70);
+  padding: 10px 14px;
+  border-radius: 999px;
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+
+.nav-link:hover{
+  background: rgba(255,255,255,.55);
+  transform: translateY(-1px);
+}
+
+.nav-link.active{
+  background: var(--accent);
+  color: #fff;
 }
 
 /* =========================
