@@ -738,7 +738,10 @@ footer {
   color: #FF8500;
   font-size: 0.9rem;
 }
-
+/* Pull content closer to subtitle on Talent page */
+.talent-page .container{
+  padding-bottom: 1.5rem; /* was 4rem */
+}
 /* =========================
    MOBILE
 ========================= */
