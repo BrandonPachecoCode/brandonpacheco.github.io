@@ -1,6 +1,14 @@
 /* =========================
    GLOBAL / BASE
 ========================= */
+* { box-sizing: border-box; }
+
+/* Base */
+html, body{
+  height: 100%;
+}
+
+/* ✅ SINGLE BODY RULE (keeps text orange + pushes content below fixed nav) */
 body{
   margin: 0;
   min-height: 100%;
@@ -19,8 +27,7 @@ body{
 
 /* =========================
    BRANDON — COLOR SYSTEM
-   ========================= */
-
+========================= */
 :root{
   --bg: #CCDAD1;        /* full website background */
   --window: #E0E6E2;    /* “windows” / cards */
@@ -44,18 +51,6 @@ h2 + p{
   color: var(--subtitle) !important;
 }
 
-/* Base */
-html, body{
-  height: 100%;
-}
-
-body{
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-}
-
 /* “Window” surface helper (cards/sections) */
 .window{
   background: var(--window);
@@ -71,22 +66,14 @@ body{
 
 /* =========================
    TOP NAV (menu accent)
-   ========================= */
-body{
-  margin: 0;
-  min-height: 100%;
-  background: var(--bg);
-
-  /* TEXT */
-  color: #FF8500; /* default text ORANGE */
-
-  /* FONT */
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
-               Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-
-  /* ✅ FIX FOR FIXED NAV */
-  padding-top: 64px;
-}
+========================= */
+.top-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 1000;
 
   display: flex;
   align-items: center;
@@ -122,6 +109,7 @@ body{
   border: 1px solid rgba(255,134,0,.45);
   box-shadow: 0 18px 60px rgba(255,134,0,.12);
 }
+
 /* =========================
    LAYOUT / TYPO
 ========================= */
@@ -160,11 +148,6 @@ h2 {
   margin: 0 0 1rem;
   font-size: 1.25rem;
   letter-spacing: -0.01em;
-}
-
-/* DEFAULT TEXT = ORANGE */
-body {
-  color: #FF8500;
 }
 
 /* TITLES & HEADINGS = BLACK */
@@ -628,8 +611,6 @@ h3,
    - Instagram does NOT allow direct image hotlink covers.
    - Use official embed: <blockquote class="instagram-media" ...>
 ========================= */
-
-
 .work-grid{
   display:grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -756,10 +737,6 @@ footer {
   -------------------------- */
   .top-nav{
     height: 64px;
-  }
-
-  body{
-    padding-top: 64px; /* keep space for fixed nav */
   }
 
   /* -------------------------
@@ -893,6 +870,7 @@ footer {
     flex-wrap: wrap !important;
   }
 }
+
 /* =========================
    iPHONE HERO BUBBLES — match your mock
    (PASTE AT VERY BOTTOM)
