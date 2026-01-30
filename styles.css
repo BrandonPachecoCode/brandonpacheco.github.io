@@ -584,8 +584,6 @@ h3,
 
 /* =========================
    ✅ UPDATES PAGE (Instagram covers fix)
-   - Instagram does NOT allow direct image hotlink covers.
-   - Use official embed: <blockquote class="instagram-media" ...>
 ========================= */
 .work-grid{
   display:grid;
@@ -699,31 +697,46 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Pull content closer to subtitle on Talent page */
-.talent-page .container{
-  padding-bottom: 1.5rem; /* was 4rem */
+/* =========================================
+   ✅ MOVE TALENT + BRANDS UP (WORKING)
+   IMPORTANT: these only work if the page has the body class
+   <body class="talent-page">  and  <body class="brands-page">
+========================================= */
+.talent-page p.subtitle{ margin-bottom: 1.2rem !important; }
+.talent-page .container{ padding-top: 2.5rem !important; padding-bottom: 2rem !important; }
+.talent-page .talent-viewport{ margin-top: 0 !important; }
+
+.brands-page p.subtitle{ margin-bottom: 1.2rem !important; }
+.brands-page .container{ padding-top: 2.5rem !important; padding-bottom: 2rem !important; }
+.brands-page .brands-page{ margin-top: 0 !important; }
+
+/* Fallback (only if browser supports :has) — works without HTML changes */
+@supports selector(.x:has(.y)){
+  .container:has(.talent-viewport){
+    padding-top: 2.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .container:has(.talent-viewport) p.subtitle{
+    margin-bottom: 1.2rem !important;
+  }
+
+  .container:has(.brands-grid){
+    padding-top: 2.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .container:has(.brands-grid) p.subtitle{
+    margin-bottom: 1.2rem !important;
+  }
 }
+
 /* =========================
    MOBILE
 ========================= */
-/* =========================
-   iPHONE / MOBILE FIXES
-   (PASTE AT VERY BOTTOM OF styles.css)
-========================= */
 @media (max-width: 600px){
 
-  /* -------------------------
-     1) TOP NAV (keep it stable)
-  -------------------------- */
   .top-nav{
     height: 64px;
   }
-
-  /* -------------------------
-     2) VIDEO HERO (Show FULL frame)
-     - No crop (no zoom)
-     - Any leftover space matches site bg, not black
-  -------------------------- */
 
   /* Container */
   .reel-hero{
@@ -734,11 +747,10 @@ footer {
     overflow: hidden;
   }
 
-  /* If your markup uses .reel-hero__media */
   .reel-hero__media{
     position: relative !important;
     width: 100% !important;
-    aspect-ratio: 16 / 9;        /* full YouTube frame */
+    aspect-ratio: 16 / 9;
     background: var(--bg) !important;
     overflow: hidden !important;
   }
@@ -748,22 +760,14 @@ footer {
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    transform: none !important;  /* IMPORTANT: stops zoom/crop */
+    transform: none !important;
     border: 0 !important;
     pointer-events: none;
   }
 
-  /* If your markup uses .reel-hero__media without __media wrapper, also protect this: */
   .reel-hero iframe{
     transform: none !important;
   }
-
-  /* -------------------------
-     3) HERO IMAGE + BUBBLES
-     - Smaller chips
-     - Allow wrap (they currently overflow)
-     - Bio bubble scrolls instead of covering photo
-  -------------------------- */
 
   .hero{
     padding-top: 0.75rem !important;
@@ -774,10 +778,9 @@ footer {
     border-radius: 18px !important;
   }
 
-  /* Overlay placement */
   .hero-overlay{
-    transform: none !important;            /* remove desktop translate */
-    align-items: flex-start !important;    /* start from top */
+    transform: none !important;
+    align-items: flex-start !important;
     justify-content: center !important;
     padding: 12px !important;
     padding-top: 18px !important;
@@ -788,9 +791,8 @@ footer {
     gap: 10px !important;
   }
 
-  /* Title row (chips) */
   .hero-bubble.title{
-    flex-wrap: wrap !important;       /* allow wrap */
+    flex-wrap: wrap !important;
     white-space: normal !important;
     gap: 8px !important;
     justify-content: center !important;
@@ -804,7 +806,6 @@ footer {
     border-radius: 999px !important;
   }
 
-  /* Bio bubble (text box) */
   .hero-bubble:not(.title){
     margin-top: 8px !important;
     max-width: 92% !important;
@@ -812,25 +813,18 @@ footer {
     font-size: 0.85rem !important;
     line-height: 1.35 !important;
 
-    /* key fix: stop it taking over the whole photo */
     max-height: 36vh !important;
     overflow: auto !important;
     -webkit-overflow-scrolling: touch;
 
-    /* keep it readable */
     background: rgba(0,0,0,0.50) !important;
     border: 1px solid rgba(255,255,255,0.12) !important;
   }
 
-  /* If you have .hero-bubble .text wrapper */
   .hero-bubble .text{
-    margin-top: 0 !important; /* remove any big pushes */
+    margin-top: 0 !important;
   }
 
-  /* -------------------------
-     4) OPTIONAL: Make the “reel hero card” not huge on mobile
-     (the box that says Brandon Pacheco + buttons)
-  -------------------------- */
   .reel-hero__content{
     padding: 14px !important;
   }
@@ -851,13 +845,8 @@ footer {
   }
 }
 
-/* =========================
-   iPHONE HERO BUBBLES — match your mock
-   (PASTE AT VERY BOTTOM)
-========================= */
 @media (max-width: 600px){
 
-  /* Keep overlay pinned to the photo (top → bottom) */
   .hero-overlay{
     position: absolute !important;
     inset: 0 !important;
@@ -868,18 +857,16 @@ footer {
     justify-content: center !important;
   }
 
-  /* Make the bubble stack fill the image so we can push items apart */
   .hero-bubbles{
     width: 100% !important;
     max-width: 100% !important;
-    height: 100% !important;                /* ✅ key */
+    height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important; /* chips top, bio bottom */
+    justify-content: space-between !important;
     gap: 0 !important;
   }
 
-  /* ---------- TITLE CHIPS (TOP) ---------- */
   .hero-bubble.title{
     align-self: center !important;
     margin-top: 6px !important;
@@ -889,11 +876,11 @@ footer {
     padding: 0 !important;
 
     display: flex !important;
-    flex-wrap: wrap !important;        /* ✅ wrap instead of overflow */
+    flex-wrap: wrap !important;
     justify-content: center !important;
     gap: 8px !important;
 
-    opacity: 1 !important;             /* keep visible */
+    opacity: 1 !important;
     transform: none !important;
   }
 
@@ -904,7 +891,6 @@ footer {
     border-radius: 999px !important;
   }
 
-  /* ---------- BIO BOX (BOTTOM) ---------- */
   .hero-bubble:not(.title){
     align-self: center !important;
     margin: 0 !important;
@@ -912,15 +898,12 @@ footer {
     width: 92% !important;
     max-width: 92% !important;
 
-    /* smaller + sits low */
     padding: 12px 14px !important;
     font-size: 0.85rem !important;
     line-height: 1.35 !important;
 
-    /* ✅ keep it low like your mock */
     margin-bottom: 14px !important;
 
-    /* ✅ stop it covering the whole image */
     max-height: 34% !important;
     overflow: auto !important;
     -webkit-overflow-scrolling: touch;
@@ -933,7 +916,6 @@ footer {
     transform: none !important;
   }
 
-  /* Remove any old pushes that were moving it weirdly */
   .hero-bubble .text{ margin-top: 0 !important; }
   .hero-bubble:not(.title){ margin-top: 0 !important; }
 }
