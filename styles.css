@@ -662,27 +662,6 @@ h2{
   font-size: 14px;
 }
 
-/* Instagram */
-.instagram-contact a{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.instagram-icon{
-  width: 22px;
-  height: 22px;
-}
-
-.instagram-text{
-  font-size: 14px;
-  color: #FF8500;
-}
-
-.instagram-contact a:hover{
-  opacity: .7;
-}
 .site-footer{
   width: 100%;
   display: flex;
@@ -690,17 +669,16 @@ h2{
   padding: 60px 0 40px;
 }
 
-/* Row */
 .contact-row{
   display: flex;
-  align-items: center;
-  gap: 40px;
+  gap: 48px;
 }
 
-/* Blocks */
+/* Shared block */
 .contact-block{
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
 }
 
@@ -720,28 +698,23 @@ h2{
   font-size: 14px;
 }
 
-/* Instagram link */
-.instagram-block a{
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Instagram */
+.instagram-block{
+  gap: 8px;
+}
+
+.instagram-icon{
+  width: 26px;          /* bigger */
+  height: 26px;
+}
+
+.instagram-link{
+  font-size: 14px;
+  color: #FF8500;
   text-decoration: none;
 }
 
-/* Icon */
-.instagram-icon{
-  width: 22px;
-  height: 22px;
-}
-
-/* Text */
-.instagram-text{
-  font-size: 14px;
-  color: #FF8500;
-}
-
-/* Hover */
-.instagram-block a:hover{
+.instagram-link:hover{
   opacity: .7;
 }
 
@@ -749,7 +722,12 @@ h2{
 @media (max-width: 600px){
   .contact-row{
     flex-direction: column;
-    gap: 24px;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .contact-block{
+    align-items: center;
   }
 }
 /* =========================
