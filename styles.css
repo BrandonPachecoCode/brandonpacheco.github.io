@@ -682,13 +682,75 @@ h2{
 /* =========================
    FOOTER
 ========================= */
-footer{
-  text-align:center;
-  padding:2rem;
-  color:var(--subtitle);
-  font-size:.9rem;
+.site-footer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0 40px;
 }
 
+/* Row */
+.contact-row{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Blocks */
+.contact-block{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Contact label */
+.contact-label{
+  font-size: 14px;
+  color: rgba(0,0,0,.5);
+}
+
+/* Email pill */
+.contact-pill{
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
+
+/* Instagram link */
+.instagram-block a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* Icon */
+.instagram-icon{
+  width: 22px;
+  height: 22px;
+}
+
+/* Text */
+.instagram-text{
+  font-size: 14px;
+  color: #FF8500;
+}
+
+/* Hover */
+.instagram-block a:hover{
+  opacity: .7;
+}
+
+/* Mobile */
+@media (max-width: 600px){
+  .contact-row{
+    flex-direction: column;
+    gap: 24px;
+  }
+}
 /* =========================
    MOVE TALENT + BRANDS UP
    (requires <body class="talent-page"> / <body class="brands-page">)
