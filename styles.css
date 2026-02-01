@@ -635,6 +635,10 @@ h2{
   flex-wrap: wrap;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 /* Contact block */
 .contact-item{
   display: flex;
@@ -679,9 +683,6 @@ h2{
 .instagram-contact a:hover{
   opacity: .7;
 }
-/* =========================
-   FOOTER
-========================= */
 .site-footer{
   width: 100%;
   display: flex;
