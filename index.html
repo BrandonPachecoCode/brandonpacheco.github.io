@@ -419,26 +419,50 @@
     </div>
   </div>
 </section>
+/* Contact block */
+.contact-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 
-<footer class="site-footer">
-  <div class="contact-row">
+.contact-label{
+  font-size: 14px;
+  color: var(--text-muted);
+}
 
-    <div class="contact-block">
-      <span class="contact-label">Contact</span>
-      <a href="mailto:brandonchopas@icloud.com" class="contact-pill">
-        brandonchopas@icloud.com
-      </a>
-    </div>
+/* Email pill (keeps your current look) */
+.contact-pill{
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+}
 
-    <div class="contact-block instagram-block">
-      <a href="https://www.instagram.com/brandonpachecoh/" remember target="_blank" rel="noopener">
-        <img src="logos/instagram-logo.png" alt="Instagram" class="instagram-icon">
-        <span class="instagram-text">A behind the scenes</span>
-      </a>
-    </div>
+/* Instagram */
+.instagram-contact a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
 
-  </div>
-</footer>
+.instagram-icon{
+  width: 22px;
+  height: 22px;
+}
+
+.instagram-text{
+  font-size: 14px;
+  color: #FF8500;
+}
+
+.instagram-contact a:hover{
+  opacity: .7;
+}
   <p>© 2026 Brandon Pacheco</p>
 </footer>
 
