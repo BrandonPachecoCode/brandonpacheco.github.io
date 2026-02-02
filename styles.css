@@ -687,6 +687,20 @@ h2{
   font-size: 14px;
   color: #FF8500;
 }
+
+.footer{
+  width: min(1100px, 92vw);
+  margin: 28px auto 40px;
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  align-items:flex-start;
+}
+
+@media (max-width: 700px){
+  .footer{ flex-direction:column; gap:18px; }
+}
+
 /* =========================
    MOVE TALENT + BRANDS UP
    (requires <body class="talent-page"> / <body class="brands-page">)
