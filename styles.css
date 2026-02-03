@@ -536,6 +536,36 @@ h2{
 }
 
 /* =========================
+   FOOTER / CONTACT
+========================= */
+
+.footer{
+  width: min(1100px, 92vw);
+  margin: 28px auto 44px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end; /* keeps both blocks aligned */
+  gap:40px;
+}
+
+.instagram-contact{
+  align-items:flex-end; /* right block flush right */
+  text-align:right;
+}
+
+.instagram-icon{
+  width: 34px;   /* bigger */
+  height: 34px;
+  display:block;
+}
+
+.instagram-text{
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--subtitle);
+}
+
+/* =========================
    UPDATES PAGE (Instagram covers fix)
 ========================= */
 .work-grid{
