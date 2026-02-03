@@ -540,29 +540,90 @@ h2{
 ========================= */
 
 .footer{
+  width: 100%;
+  padding: 32px 0 48px;
+}
+
+.footer-inner{
   width: min(1100px, 92vw);
-  margin: 28px auto 44px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end; /* keeps both blocks aligned */
-  gap:40px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
 }
 
-.instagram-contact{
-  align-items:flex-end; /* right block flush right */
-  text-align:right;
+/* LEFT */
+.contact-item{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.instagram-icon{
-  width: 40px;
-  height: 40px;
-  display:block;
-}
-
-.instagram-text{
-  margin-top: 4px;
-  font-size: 13px;
+/* LABEL */
+.contact-label{
+  font-size: 12px;
+  font-weight: 600;
   color: var(--subtitle);
+}
+
+/* EMAIL PILL */
+.contact-pill{
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* RIGHT */
+.instagram-contact{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* IG PILL */
+.instagram-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* ICON */
+.instagram-icon{
+  width: 20px;
+  height: 20px;
+}
+
+/* HANDLE */
+.instagram-text{
+  font-size: 14px;
+  color: #000;
+}
+
+/* MOBILE */
+@media (max-width: 640px){
+  .footer-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .instagram-contact{
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 
 /* =========================
