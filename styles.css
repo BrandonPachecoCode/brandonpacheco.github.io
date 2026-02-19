@@ -886,150 +886,93 @@ h2{
   }
 }
 /* ===============================
-  MOBILE FIXES — header spacing + visible text
-  Paste at the End of your stylesheet
-=================================*/
 
-/* Reduce the large header/content gap on small screens.
-   Uses the adjacent sibling selector to target the page container
-   immediately after the fixed .top-nav. This keeps desktop spacing intact. */
-@media (max-width: 980px) {
-  .top-nav + .container,
-  .top-nav ~ .container {
-    padding-top: 1.25rem !important; /* small gap under fixed nav */
-  }
-  header { padding-top: 1.25rem !important; } /* reduce giant hero top padding on mobile/tablet */
-}
-
-/* Extra-tight spacing on phones */
-@media (max-width: 600px) {
-  /* make sure the main page body sits close under the fixed nav */
-  .top-nav + .container,
-  .top-nav ~ .container {
-    padding-top: .9rem !important;
-  }
-  body { padding-top: 64px; } /* keep nav space but don't double it up with container */
-  header { padding-top: .9rem !important; margin-bottom: .6rem; }
-
-  /* Hero: reduce top padding and keep overlay in view */
-  .hero { padding-top: .6rem !important; padding-bottom: 1rem !important; }
-  .hero-overlay { transform: none !important; padding: 12px !important; align-items: flex-start !important; }
-
-  /* Make sure hero/bubble copy is visible on mobile even if animations haven't run yet.
-     This fixes the 'text disappeared' issue where opacity was left at 0. */
-  .hero-bubble,
-  .hero-bubble:not(.title) {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* If your bubbles are dark-on-dark (hard to read), force a readable color/background */
-  .hero-bubble,
-  .hero-bubble:not(.title) {
-    color: #0b0b0b !important; /* dark text for readability */
-    background: rgba(255,255,255,0.95) !important; /* light card so black text reads well */
-    border: 1px solid rgba(11,11,11,0.06) !important;
-    box-shadow: 0 14px 40px rgba(0,0,0,.18) !important;
-  }
-
-  /* Title chips should remain pill-shaped but slightly smaller */
-  .title-chip { font-size: .78rem !important; padding: 8px 10px !important; }
-
-  /* Brand / talent grid — bring content up a touch so huge cards don't push too far under header */
-  .brands-page .brands-grid,
-  .talent-page .talent-viewport {
-    margin-top: 0.25rem !important;
-  }
-}
-
-/* Make sure subtitles remain visible and use accent color on all sizes */
-.subtitle,
-header p.subtitle,
-h1 + p,
-h2 + p {
-  color: var(--subtitle) !important;
-  opacity: 1 !important;
-}
-
-/* Optional: if your site uses JS animations to reveal content, and those animations fail on slow mobile,
-   this global rule makes sure core content is still readable without waiting for JS. */
-@media (prefers-reduced-motion: reduce) {
-  .hero-bubble,
-  .title-chip,
-  .brands-grid img,
-  .talent-vinyl--5 .talent-card {
-    transition: none !important;
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-/* =========================
-   TALENT HORIZONTAL SCROLLER FIXES
-   Paste at end of stylesheet
-========================= */
-
-/* Ensure the top navigation always sits above everything */
-.top-nav {
-  position: fixed;         /* already fixed — reinforce */
-  left: 0;
-  right: 0;
-  z-index: 9999;           /* very high so it never gets covered by the scroller */
-  will-change: transform;  /* help mobile compositing */
-}
-
-/* No page-level horizontal overflow — prevents accidental page-wide pan */
-html, body {
-  overflow-x: hidden;
-}
-
-/* Contain the scroller inside the viewport box */
-.talent-viewport {
-  position: relative;         /* ensure children are clipped to this container */
-  overflow: hidden;           /* clip cards so they stay inside the rounded box */
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Make the vinyl behave like a proper horizontal carousel:
-   - horizontal-only scroll
-   - touch pan only horizontally
-   - don't let browser overscroll/bounce affect the page */
-.talent-vinyl {
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;            /* allow horizontal scrolling */
-  overflow-y: hidden;          /* prevent vertical scroll inside the row */
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;/* optional: snaps cards into place */
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain; /* keeps overscroll from propagating to page */
-  touch-action: pan-x;            /* help mobile only-pan horizontally */
-  padding-bottom: 12px;           /* visual breathing room inside viewport */
-}
-
-/* Make each card a snap point (optional but helpful UX) */
-.talent-vinyl--5 .talent-card {
-  scroll-snap-align: center;
-}
-
-/* Prevent the scroller from projecting box-shadow outside its container on iOS */
-.talent-viewport,
-.talent-vinyl,
-.talent-vinyl .talent-card {
-  -webkit-mask-image: -webkit-radial-gradient(white, black); /* forces proper compositing */
-}
-
-/* If you use pointer / arrow buttons to move the scroller, ensure they sit above content */
-.talent-arrows,
-.talent-nav {
-  position: relative;
-  z-index: 10000; /* above the scroller but below the top-nav */
-}
-
-/* Reduce accidental vertical page move while swiping horizontally on very small screens */
 @media (max-width: 600px) {
   .talent-vinyl {
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
+}
+/* ======================================================
+   CLEAN MOBILE LAYER (ONLY MOBILE RULES)
+   Single responsive system — no conflicts
+====================================================== */
+
+@media (max-width: 768px){
+
+  /* ---------- Layout spacing ---------- */
+
+  .container{
+    padding: 1.5rem 1.2rem 2rem;
+  }
+
+  header{
+    padding-top: 1rem;
+  }
+
+  h1{
+    font-size: 2rem;
+  }
+
+  /* ---------- Hero fixes ---------- */
+
+  .hero{
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* Remove desktop vertical shift */
+  .hero-overlay{
+    transform: none;
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  /* Ensure hero text is always visible */
+  .hero-bubble{
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-bubble.title{
+    flex-wrap: wrap;
+    white-space: normal;
+    justify-content: center;
+  }
+
+  .title-chip{
+    font-size: .75rem;
+    padding: 8px 10px;
+  }
+
+  /* ---------- Reel layout stacks ---------- */
+
+  .reel-layout{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* ---------- Talent section ---------- */
+
+  .talent-viewport{
+    margin-top: 0;
+  }
+
+  .talent-vinyl--5 .talent-card{
+    width: 86vw;
+    max-width: none;
+  }
+
+  /* ---------- Brands grid ---------- */
+
+  .brands-grid{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* ---------- Work grid ---------- */
+
+  .work-grid{
+    grid-template-columns: 1fr;
+  }
+
 }
