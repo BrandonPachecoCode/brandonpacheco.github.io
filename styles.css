@@ -433,122 +433,159 @@ h2{
 
 /* =========================
    TALENT — 3 VISIBLE (WORKING)
+   Cleaned + controls outside mask
 ========================= */
-.talent-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
+
+/* Head line: contains hint text and arrows (kept as sibling of viewport) */
+.talent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .75rem;
+  position: relative; /* stacking context for hint/arrows when needed */
+  z-index: 5;
 }
 
-.talent-hint{
-  margin:0;
-  color:rgba(255,255,255,.65);
-  font-size:.95rem;
+/* Small "scroll or use arrows" hint — we'll position it above the card */
+.talent-hint {
+  margin: 0;
+  color: rgba(11,11,11,0.55);
+  font-size: .95rem;
+  position: absolute;
+  left: 12px;
+  top: -18px;
+  pointer-events: none;
+  z-index: 6;
 }
 
-.talent-arrows{ display:flex; gap:10px; }
-
-.talent-nav{
-  height:40px;
-  width:40px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(0,0,0,.28);
-  color:rgba(255,255,255,.95);
-  font-size:22px;
-  cursor:pointer;
-}
-.talent-nav:hover{ background:rgba(255,255,255,.08); }
-
-.talent-viewport{
-  width:min(100%,1240px);
-  margin:0 auto;
-  overflow:hidden;
-  border-radius:22px;
-  margin-top:-2.5rem;
+/* Arrows container (kept outside the rounded mask visually) */
+.talent-arrows {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  right: 12px;
+  top: -12px;
+  z-index: 7;
+  pointer-events: auto;
 }
 
-.talent-vinyl{
-  display:flex;
-  gap:18px;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-  padding:14px 2px 16px;
+/* Arrow / nav button look */
+.talent-nav {
+  height: 40px;
+  width: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.28);
+  color: rgba(255,255,255,.95);
+  font-size: 22px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.talent-vinyl::-webkit-scrollbar{ display:none; }
+.talent-nav:hover { background: rgba(255,255,255,.08); }
 
-/* 3 per view */
-.talent-vinyl--5 .talent-card{
-  flex:0 0 auto;
-  width:calc((100% - (18px * 2)) / 3);
-  max-width:400px;
-
-  aspect-ratio:2 / 3;
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.06);
-  box-shadow:0 22px 70px rgba(0,0,0,.55);
-  position:relative;
-  padding:0;
-  cursor:pointer;
-  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
-}
-
-.talent-vinyl--5 .talent-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+/* VIEWPORT
+   - viewport keeps overall positioning and rounded visual BUT allow overflow visible
+     so controls and hint can sit outside the mask without being clipped.
+*/
+.talent-viewport {
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  border-radius: 22px;
+  margin-top: -2.5rem;
+  position: relative;
+  overflow: visible; /* allow arrows/hint to show above the rounded card */
+  z-index: 2;
 }
 
-.talent-vinyl--5 .talent-card:hover{
-  transform:translateY(-10px);
-  background:rgba(255,255,255,.09);
-  box-shadow:0 34px 110px rgba(0,0,0,.72);
+/* VINYL (inner scroller)
+   - this is the visual card: rounded + overflow hidden so images are clipped
+*/
+.talent-vinyl {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;   /* prevent vertical scrolling inside the row */
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 14px 2px 16px;
+  border-radius: 22px;  /* same radius so clipping matches viewport */
+  overflow: hidden;     /* clip images to rounded rect */
+  box-shadow: 0 22px 70px rgba(0,0,0,.55);
+}
+.talent-vinyl::-webkit-scrollbar { display: none; }
+
+/* 3 per view (desktop) */
+.talent-vinyl--5 .talent-card {
+  flex: 0 0 auto;
+  width: calc((100% - (18px * 2)) / 3);
+  max-width: 400px;
+
+  aspect-ratio: 2 / 3;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  /* move the shadow to the outer vinyl, inner cards keep subtle */
+  box-shadow: none;
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 
-.talent-label{
-  position:absolute;
-  left:14px;
-  right:14px;
-  bottom:14px;
-  padding:10px 12px;
-  border-radius:999px;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(10px);
-  color:rgba(255,255,255,.95);
-  font-size:.9rem;
-  font-weight:800;
-  opacity:0;
-  transform:translateY(6px);
-  transition:opacity .18s ease,transform .18s ease;
-  text-align:center;
-  pointer-events:none;
+.talent-vinyl--5 .talent-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.talent-card:hover .talent-label{
-  opacity:1;
-  transform:translateY(0);
+.talent-vinyl--5 .talent-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255,255,255,.09);
+  box-shadow: 0 34px 110px rgba(0,0,0,.72);
+}
+
+/* label that appears on hover */
+.talent-label {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(10px);
+  color: rgba(255,255,255,.95);
+  font-size: .9rem;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease;
+  text-align: center;
+  pointer-events: none;
+}
+.talent-card:hover .talent-label {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================
-   FOOTER / CONTACT
+   FOOTER / CONTACT (stable across pages)
 ========================= */
 footer, .footer {
   width: 100%;
   box-sizing: border-box;
-  position: relative;      /* not absolute — stays in normal flow */
-  z-index: 1;              /* sit under header/controls */
-  padding: 32px 0 48px;    /* consistent vertical spacing */
-  background: transparent; /* keep page background (change if you want a block bg) */
-  clear: both;             /* ensure footer is below floated content */
+  position: relative;
+  z-index: 1;
+  padding: 32px 0 48px;
+  background: transparent;
+  clear: both;
 }
 
-/* inner container that centers content & limits width */
 .footer-inner {
   max-width: 1100px;
   width: min(1100px, 92vw);
@@ -561,7 +598,6 @@ footer, .footer {
   padding: 0 1rem;
 }
 
-/* LEFT: contact block */
 .footer .contact-item,
 .footer .contact-left {
   display: flex;
@@ -570,7 +606,6 @@ footer, .footer {
   align-items: flex-start;
 }
 
-/* label and pill styling (consistent) */
 .footer .contact-label {
   font-size: 12px;
   font-weight: 600;
@@ -589,7 +624,6 @@ footer, .footer {
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
-/* RIGHT: instagram block */
 .footer .instagram-contact,
 .footer .contact-right {
   display: flex;
@@ -611,15 +645,12 @@ footer, .footer {
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
-.footer .instagram-icon { width:20px; height:20px; }
+.footer .instagram-icon { width: 20px; height: 20px; }
 
-/* make sure these pills don't expand beyond container and remain visually identical */
 .footer .contact-pill,
-.footer .instagram-pill {
-  white-space: nowrap;
-}
+.footer .instagram-pill { white-space: nowrap; }
 
-/* ===== responsive: stack on small screens ===== */
+/* Responsive footer: stack on small screens */
 @media (max-width: 640px) {
   .footer-inner {
     flex-direction: column;
@@ -636,6 +667,33 @@ footer, .footer {
   }
 }
 
+/* =========================
+   RESPONSIVE: mobile tweaks for talent scroller
+========================= */
+@media (max-width: 768px) {
+  /* mobile: one card at a time */
+  .talent-vinyl--5 .talent-card {
+    width: 86vw;
+    max-width: none;
+  }
+
+  /* keep arrows visible and smaller on mobile */
+  .talent-arrows {
+    right: 10px;
+    top: -10px;
+  }
+
+  .talent-hint {
+    left: 10px;
+    top: -16px;
+    font-size: .9rem;
+  }
+
+  /* reduce negative spacing so the card doesn't feel too low */
+  .talent-viewport {
+    margin-top: 0;
+  }
+}
 /* =========================
    UPDATES PAGE (Instagram covers fix)
 ========================= */
