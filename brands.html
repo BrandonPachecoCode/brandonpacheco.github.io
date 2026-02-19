@@ -269,36 +269,38 @@
   </div>
 </div>
 
-<footer>
-  <p>© 2026 Brandon Pacheco</p>
+<footer class="footer">
+
+  <div class="footer-inner">
+
+    <div class="contact-item">
+      <span class="contact-label">Contact</span>
+      <a class="contact-pill" href="mailto:brandonchopas@icloud.com">
+        brandonchopas@icloud.com
+      </a>
+    </div>
+
+    <a
+      class="instagram-contact"
+      href="https://www.instagram.com/brandonpachecoh/"
+      target="_blank"
+      rel="noopener"
+    >
+      <span class="contact-label">Behind the scenes</span>
+
+      <div class="instagram-pill">
+        <img
+          src="logos/instagram-logo.png"
+          alt="Instagram"
+          class="instagram-icon"
+        />
+        <span class="instagram-text">@brandonpachecoh</span>
+      </div>
+    </a>
+
+  </div>
+
 </footer>
-
-<script>
-  const modal = document.getElementById("video-modal");
-  const modalContent = modal.querySelector(".video-modal-content");
-  const frame = modal.querySelector(".video-frame");
-  const closeBtn = modal.querySelector(".video-close");
-
-  function toYouTubeEmbed(url) {
-    if (url.includes("youtube.com")) {
-      const id = url.split("v=")[1]?.split("&")[0];
-      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : url;
-    }
-    if (url.includes("youtu.be")) {
-      const id = url.split("youtu.be/")[1]?.split("?")[0];
-      return id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : url;
-    }
-    return url;
-  }
-
-  function toInstagramEmbed(url) {
-    const clean = url.split("?")[0];
-    if (clean.includes("instagram.com")) {
-      const base = clean.endsWith("/") ? clean : clean + "/";
-      return `${base}embed/`;
-    }
-    return url;
-  }
 
   function openModal(embedUrl, orientation) {
     modalContent.classList.toggle("landscape", orientation === "landscape");
