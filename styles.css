@@ -611,426 +611,177 @@ h2{
   font-size: 14px;
   color: #000;
 }
-
-/* MOBILE */
-@media (max-width: 640px){
-  .footer-inner{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  .instagram-contact{
-    align-items: flex-start;
-    text-align: left;
-  }
-}
-
 /* =========================
-   UPDATES PAGE (Instagram covers fix)
+   MOBILE / TABLET OVERRIDES
+   Paste at the end of your stylesheet
+   Breakpoints: 768px (tablet) and 600px (phone)
 ========================= */
-.work-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
-}
 
-.work-card{
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.04);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 22px 70px rgba(0,0,0,.55);
-}
-
-.work-thumb{
-  position:relative;
-  aspect-ratio:16 / 9;
-  overflow:hidden;
-  background:rgba(255,255,255,.02);
-}
-
-.work-thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.badge{
-  position:absolute;
-  left:12px;
-  top:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  font-size:.78rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  font-weight:800;
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(10px);
-}
-
-.work-body{ padding:14px 14px 16px; }
-
-.work-title{
-  margin:0 0 6px;
-  font-size:1rem;
-  letter-spacing:-.01em;
-}
-
-.work-meta{
-  margin:0 0 12px;
-  color:rgba(255,255,255,.65);
-  font-size:.9rem;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.work-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.work-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.92);
-  color:#0b0b0b;
-  text-decoration:none;
-  font-weight:800;
-  font-size:.9rem;
-}
-.work-btn:hover{ opacity:.92; }
-
-.work-embed{ padding:14px 14px 0; }
-
-.work-embed .instagram-media{
-  margin:0 auto !important;
-  border-radius:18px !important;
-  overflow:hidden !important;
-  background:rgba(255,255,255,.03) !important;
-}
-.contact-row{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  margin-top: 48px;
-  flex-wrap: wrap;
-}
-
-/* =========================
-   MOVE TALENT + BRANDS UP
-   (requires <body class="talent-page"> / <body class="brands-page">)
-========================= */
-.talent-page p.subtitle{ margin-bottom:1.2rem !important; }
-.talent-page .container{ padding-top:2.5rem !important; padding-bottom:2rem !important; }
-.talent-page .talent-viewport{ margin-top:0 !important; }
-
-.brands-page p.subtitle{ margin-bottom:1.2rem !important; }
-.brands-page .container{ padding-top:2.5rem !important; padding-bottom:2rem !important; }
-.brands-page .brands-page{ margin-top:0 !important; }
-
-/* Fallback (only if browser supports :has) */
-@supports selector(.x:has(.y)){
-  .container:has(.talent-viewport){
-    padding-top:2.5rem !important;
-    padding-bottom:2rem !important;
-  }
-  .container:has(.talent-viewport) p.subtitle{ margin-bottom:1.2rem !important; }
-
-  .container:has(.brands-grid){
-    padding-top:2.5rem !important;
-    padding-bottom:2rem !important;
-  }
-  .container:has(.brands-grid) p.subtitle{ margin-bottom:1.2rem !important; }
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width:980px){
-  .work-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-}
-
-@media (max-width:768px){
-  .hero-overlay{
-    padding:1.25rem;
-    transform:translateY(-6%);
-  }
-  .hero-bubbles{ width:100%; }
-  .hero-bubble{ font-size:.92rem; }
-  .title-chip{ font-size:.88rem; padding:9px 14px; }
-
-  /* talent: 1 big card at a time */
-  .talent-viewport{ width:100%; }
-  .talent-vinyl--5 .talent-card{
-    width:86vw;
-    max-width:none;
-  }
-}
-
-@media (max-width:620px){
-  .work-grid{ grid-template-columns:1fr; }
-}
-
-@media (max-width:600px){
-  /* reel hero / video */
-  .reel-hero{
-    height:auto !important;
-    min-height:0 !important;
-    padding-top:64px !important;
-    background:var(--bg) !important;
-    overflow:hidden;
-  }
-  .reel-hero__media{
-    position:relative !important;
-    width:100% !important;
-    aspect-ratio:16 / 9;
-    background:var(--bg) !important;
-    overflow:hidden !important;
-  }
-  .reel-hero__media iframe{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    transform:none !important;
-    border:0 !important;
-    pointer-events:none;
-  }
-  .reel-hero iframe{ transform:none !important; }
-
-  /* hero */
-  .hero{ padding-top:.75rem !important; padding-bottom:1.25rem !important; }
-  .hero-photo{ border-radius:18px !important; }
-
-  .hero-overlay{
-    position:absolute !important;
-    inset:0 !important;
-    transform:none !important;
-    padding:14px !important;
-    display:flex !important;
-    align-items:stretch !important;
-    justify-content:center !important;
-  }
-
-  .hero-bubbles{
-    width:100% !important;
-    max-width:100% !important;
-    height:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:space-between !important;
-    gap:0 !important;
-  }
-
-  .hero-bubble.title{
-    align-self:center !important;
-    margin-top:6px !important;
-    display:flex !important;
-    flex-wrap:wrap !important;
-    justify-content:center !important;
-    gap:8px !important;
-    white-space:normal !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-
-  .title-chip{
-    font-size:.72rem !important;
-    padding:8px 10px !important;
-    letter-spacing:.03em !important;
-  }
-
-  .hero-bubble:not(.title){
-    align-self:center !important;
-    width:92% !important;
-    max-width:92% !important;
-    padding:12px 14px !important;
-    font-size:.85rem !important;
-    line-height:1.35 !important;
-
-    margin-bottom:14px !important;
-    max-height:34% !important;
-    overflow:auto !important;
-    -webkit-overflow-scrolling:touch;
-
-    background:rgba(0,0,0,.48) !important;
-    border:1px solid rgba(255,255,255,.12) !important;
-    backdrop-filter:blur(10px) !important;
-
-    opacity:1 !important;
-    transform:none !important;
-  }
-
-  .hero-bubble .text{ margin-top:0 !important; }
-
-  /* reel hero content */
-  .reel-hero__content{ padding:14px !important; }
-  .reel-hero__card{
-    width:100% !important;
-    max-width:520px !important;
-    border-radius:18px !important;
-  }
-  .reel-hero__title{ font-size:1.9rem !important; }
-  .reel-hero__actions{
-    gap:10px !important;
-    flex-wrap:wrap !important;
-  }
-}
-/* ===============================
-  MOBILE FIXES — header spacing + visible text
-  Paste at the End of your stylesheet
-=================================*/
-
-/* Reduce the large header/content gap on small screens.
-   Uses the adjacent sibling selector to target the page container
-   immediately after the fixed .top-nav. This keeps desktop spacing intact. */
+/* Prevent page-level horizontal panning on small devices */
 @media (max-width: 980px) {
-  .top-nav + .container,
-  .top-nav ~ .container {
-    padding-top: 1.25rem !important; /* small gap under fixed nav */
+  html, body, .site-wrapper, #app, .page {
+    overflow-x: hidden;
   }
-  header { padding-top: 1.25rem !important; } /* reduce giant hero top padding on mobile/tablet */
+
+  /* Ensure fixed nav sits on top and reserve its height consistently */
+  .top-nav,
+  .site-header,
+  .header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 64px !important;
+    z-index: 99999 !important;
+    background: rgba(224,230,226,0.95) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+  }
+
+  /* Narrow the large desktop container gap under the fixed nav */
+  .top-nav + .container,
+  .top-nav ~ .container,
+  .top-nav + main,
+  .top-nav ~ main,
+  .container,
+  main.container,
+  #main,
+  .page {
+    padding-top: 1.1rem !important; /* tablet: small gap */
+  }
+
+  header, .page-header {
+    padding-top: 1rem !important;
+  }
 }
 
-/* Extra-tight spacing on phones */
-@media (max-width: 600px) {
-  /* make sure the main page body sits close under the fixed nav */
-  .top-nav + .container,
-  .top-nav ~ .container {
-    padding-top: .9rem !important;
-  }
-  body { padding-top: 64px; } /* keep nav space but don't double it up with container */
-  header { padding-top: .9rem !important; margin-bottom: .6rem; }
+/* Tablet & small devices */
+@media (max-width: 768px) {
 
-  /* Hero: reduce top padding and keep overlay in view */
+  /* container & header spacing */
+  body { padding-top: 64px; } /* reserve nav space */
+  .container {
+    padding-top: clamp(.8rem, 3.5vw, 1.4rem) !important;
+    padding-bottom: 1.6rem !important;
+  }
+  header { padding-top: .9rem !important; margin-bottom: .6rem !important; text-align: center; }
+
+  /* HERO adjustments (keep overlay in-view and text visible) */
   .hero { padding-top: .6rem !important; padding-bottom: 1rem !important; }
-  .hero-overlay { transform: none !important; padding: 12px !important; align-items: flex-start !important; }
+  .hero-photo { margin-top: 0 !important; }
+  .hero-overlay { transform: none !important; padding: 12px !important; align-items: flex-start !important; justify-content: center !important; pointer-events: none; }
+  .hero-bubbles { gap: 12px !important; width: 100% !important; max-width: 100% !important; }
+  .hero-bubble.title { display: flex !important; flex-wrap: wrap !important; white-space: normal !important; gap: 8px !important; opacity: 1 !important; transform: none !important; }
+  .title-chip { padding: 8px 10px !important; font-size: .78rem !important; }
 
-  /* Make sure hero/bubble copy is visible on mobile even if animations haven't run yet.
-     This fixes the 'text disappeared' issue where opacity was left at 0. */
+  /* Ensure bubble content is visible even if JS animations haven't run */
   .hero-bubble,
-  .hero-bubble:not(.title) {
+  .hero-bubble * {
     opacity: 1 !important;
     transform: none !important;
+    visibility: visible !important;
   }
 
-  /* If your bubbles are dark-on-dark (hard to read), force a readable color/background */
-  .hero-bubble,
-  .hero-bubble:not(.title) {
-    color: #0b0b0b !important; /* dark text for readability */
-    background: rgba(255,255,255,0.95) !important; /* light card so black text reads well */
+  /* Optional: use light cards on small devices for best contrast (uncomment to force) */
+  /*
+  .hero-bubble {
+    background: rgba(255,255,255,0.96) !important;
+    color: #0b0b0b !important;
     border: 1px solid rgba(11,11,11,0.06) !important;
-    box-shadow: 0 14px 40px rgba(0,0,0,.18) !important;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.18) !important;
   }
+  */
 
-  /* Title chips should remain pill-shaped but slightly smaller */
-  .title-chip { font-size: .78rem !important; padding: 8px 10px !important; }
-
-  /* Brand / talent grid — bring content up a touch so huge cards don't push too far under header */
+  /* BRANDS / TALENT — bring these up a touch so they appear closer under nav */
   .brands-page .brands-grid,
-  .talent-page .talent-viewport {
-    margin-top: 0.25rem !important;
+  .talent-page .talent-viewport,
+  .talent-viewport {
+    margin-top: 0.2rem !important;
+    padding-top: 0 !important;
   }
+
+  /* Make work grid responsive: 1 column at tablet widths */
+  .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Talent scroller: behave like a contained horizontal carousel on tablet */
+  .talent-viewport { overflow: hidden !important; position: relative !important; z-index: 2 !important; border-radius: 22px !important; }
+  .talent-vinyl {
+    display: flex !important;
+    gap: 14px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    overscroll-behavior-x: contain !important;
+    touch-action: pan-x !important;
+    padding: 12px 6px 16px !important;
+    scroll-snap-type: x mandatory !important;
+  }
+  .talent-vinyl::-webkit-scrollbar { display: none !important; }
+  .talent-vinyl--5 .talent-card { flex: 0 0 auto !important; width: 86vw !important; max-width: none !important; scroll-snap-align: center !important; }
+
+  /* Keep subtitles visible */
+  .subtitle, header p.subtitle, h1 + p, h2 + p { color: var(--subtitle) !important; opacity: 1 !important; visibility: visible !important; }
 }
 
-/* Make sure subtitles remain visible and use accent color on all sizes */
-.subtitle,
-header p.subtitle,
-h1 + p,
-h2 + p {
-  color: var(--subtitle) !important;
-  opacity: 1 !important;
-}
+/* Phones */
+@media (max-width: 600px) {
 
-/* Optional: if your site uses JS animations to reveal content, and those animations fail on slow mobile,
-   this global rule makes sure core content is still readable without waiting for JS. */
-@media (prefers-reduced-motion: reduce) {
-  .hero-bubble,
-  .title-chip,
-  .brands-grid img,
-  .talent-vinyl--5 .talent-card {
-    transition: none !important;
-    animation: none !important;
+  /* Extra-tight spacing under header */
+  .top-nav + .container,
+  .top-nav ~ .container,
+  .container,
+  main.container,
+  #main,
+  .page {
+    padding-top: .85rem !important; /* phone: very small gap */
+  }
+  header { padding-top: .55rem !important; margin-bottom: .4rem !important; }
+
+  /* HERO: compact and keep overlay visible without pushing content too far down */
+  .hero { padding-top: .45rem !important; padding-bottom: .9rem !important; }
+  .hero-overlay { padding: 10px !important; transform: none !important; align-items: flex-start !important; justify-content: center !important; }
+
+  /* Ensure hero copy fits and is scrollable if needed */
+  .hero-bubble:not(.title) {
+    width: 92% !important;
+    max-width: 92% !important;
+    padding: 10px 12px !important;
+    font-size: .86rem !important;
+    line-height: 1.35 !important;
+    max-height: 36vh !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-bottom: 12px !important;
     opacity: 1 !important;
     transform: none !important;
+    background: rgba(255,255,255,0.96) !important; /* optional for contrast */
+    color: #0b0b0b !important;
+    border: 1px solid rgba(11,11,11,0.06) !important;
   }
-}
-/* =========================
-   TALENT HORIZONTAL SCROLLER FIXES
-   Paste at end of stylesheet
-========================= */
 
-/* Ensure the top navigation always sits above everything */
-.top-nav {
-  position: fixed;         /* already fixed — reinforce */
-  left: 0;
-  right: 0;
-  z-index: 9999;           /* very high so it never gets covered by the scroller */
-  will-change: transform;  /* help mobile compositing */
-}
-
-/* No page-level horizontal overflow — prevents accidental page-wide pan */
-html, body {
-  overflow-x: hidden;
-}
-
-/* Contain the scroller inside the viewport box */
-.talent-viewport {
-  position: relative;         /* ensure children are clipped to this container */
-  overflow: hidden;           /* clip cards so they stay inside the rounded box */
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Make the vinyl behave like a proper horizontal carousel:
-   - horizontal-only scroll
-   - touch pan only horizontally
-   - don't let browser overscroll/bounce affect the page */
-.talent-vinyl {
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;            /* allow horizontal scrolling */
-  overflow-y: hidden;          /* prevent vertical scroll inside the row */
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;/* optional: snaps cards into place */
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain; /* keeps overscroll from propagating to page */
-  touch-action: pan-x;            /* help mobile only-pan horizontally */
-  padding-bottom: 12px;           /* visual breathing room inside viewport */
-}
-
-/* Make each card a snap point (optional but helpful UX) */
-.talent-vinyl--5 .talent-card {
-  scroll-snap-align: center;
-}
-
-/* Prevent the scroller from projecting box-shadow outside its container on iOS */
-.talent-viewport,
-.talent-vinyl,
-.talent-vinyl .talent-card {
-  -webkit-mask-image: -webkit-radial-gradient(white, black); /* forces proper compositing */
-}
-
-/* If you use pointer / arrow buttons to move the scroller, ensure they sit above content */
-.talent-arrows,
-.talent-nav {
-  position: relative;
-  z-index: 10000; /* above the scroller but below the top-nav */
-}
-
-/* Reduce accidental vertical page move while swiping horizontally on very small screens */
-@media (max-width: 600px) {
+  /* Talent scroller: ensure horizontal swipe stays in the scroller and not page */
   .talent-vinyl {
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+  }
+
+  /* Work grid -> single column */
+  .work-grid { grid-template-columns: 1fr !important; }
+
+  /* Reduce heavy shadows / visual noise on tiny screens (optional) */
+  .brands-grid img,
+  .work-card,
+  .talent-card {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.14) !important;
+  }
+
+  /* Reduced-motion safety for devices that prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bubble, .title-chip, .brands-grid img, .talent-card {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 }
