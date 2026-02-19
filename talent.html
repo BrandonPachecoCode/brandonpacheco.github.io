@@ -32,7 +32,18 @@
         <button class="talent-nav next" type="button" aria-label="Scroll right">›</button>
       </div>
     </div>
+    
+.talent-vinyl {
+  -webkit-overflow-scrolling: touch; /* smooth native momentum on iOS */
+  touch-action: pan-x;               /* tell UA we intend horizontal panning */
+  overscroll-behavior-x: contain;    /* keep overscroll inside the scroller */
+  overscroll-behavior-y: auto;       /* allow page vertical scroll when needed */
+  cursor: grab;                      /* visual affordance on desktop */
+}
 
+.talent-vinyl:active { cursor: grabbing; }
+
+.talent-viewport { -webkit-overflow-scrolling: auto; }
   </section>
 </main>
 
