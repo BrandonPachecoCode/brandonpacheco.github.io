@@ -965,3 +965,72 @@ h2 + p {
     transform: none !important;
   }
 }
+/* =========================
+   TALENT HORIZONTAL SCROLLER FIXES
+   Paste at end of stylesheet
+========================= */
+
+/* Ensure the top navigation always sits above everything */
+.top-nav {
+  position: fixed;         /* already fixed — reinforce */
+  left: 0;
+  right: 0;
+  z-index: 9999;           /* very high so it never gets covered by the scroller */
+  will-change: transform;  /* help mobile compositing */
+}
+
+/* No page-level horizontal overflow — prevents accidental page-wide pan */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Contain the scroller inside the viewport box */
+.talent-viewport {
+  position: relative;         /* ensure children are clipped to this container */
+  overflow: hidden;           /* clip cards so they stay inside the rounded box */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Make the vinyl behave like a proper horizontal carousel:
+   - horizontal-only scroll
+   - touch pan only horizontally
+   - don't let browser overscroll/bounce affect the page */
+.talent-vinyl {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;            /* allow horizontal scrolling */
+  overflow-y: hidden;          /* prevent vertical scroll inside the row */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;/* optional: snaps cards into place */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain; /* keeps overscroll from propagating to page */
+  touch-action: pan-x;            /* help mobile only-pan horizontally */
+  padding-bottom: 12px;           /* visual breathing room inside viewport */
+}
+
+/* Make each card a snap point (optional but helpful UX) */
+.talent-vinyl--5 .talent-card {
+  scroll-snap-align: center;
+}
+
+/* Prevent the scroller from projecting box-shadow outside its container on iOS */
+.talent-viewport,
+.talent-vinyl,
+.talent-vinyl .talent-card {
+  -webkit-mask-image: -webkit-radial-gradient(white, black); /* forces proper compositing */
+}
+
+/* If you use pointer / arrow buttons to move the scroller, ensure they sit above content */
+.talent-arrows,
+.talent-nav {
+  position: relative;
+  z-index: 10000; /* above the scroller but below the top-nav */
+}
+
+/* Reduce accidental vertical page move while swiping horizontally on very small screens */
+@media (max-width: 600px) {
+  .talent-vinyl {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
