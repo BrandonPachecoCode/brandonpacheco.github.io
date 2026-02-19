@@ -1009,5 +1009,47 @@ footer, .footer {
   .work-grid{
     grid-template-columns: 1fr;
   }
+/* ===== TALENT: keep scroller clipped, make arrows/hint visible ===== */
+.talent-viewport {
+  position: relative;         /* establish stacking context for arrows */
+  overflow: visible !important; /* allow arrows/hint to render outside the rounded box */
+  z-index: 1;
+}
 
+/* Move the clipping to the inner scroller so images still stay inside the rounded card */
+.talent-vinyl {
+  border-radius: 22px;       /* same radius as the viewport */
+  overflow: hidden;          /* clip the images inside the rounded rect */
+  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+  padding: 14px 2px 16px;    /* keep your original spacing */
+}
+
+/* Position the arrows above the rounded box (top-right) so they're never clipped */
+.talent-arrows,
+.talent-nav {
+  position: absolute !important;
+  top: -12px !important;     /* nudge above the box */
+  right: 12px !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  gap: 10px !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure the small hint text is not inside the scroll mask and remains readable */
+.talent-hint {
+  position: absolute !important;
+  left: 12px !important;
+  top: -18px !important;
+  color: rgba(255,255,255,0.85);
+  font-size: .85rem;
+  z-index: 9998 !important;
+  pointer-events: none;
+}
+
+/* Slight visual tweak so inner scroller looks identical to previous 'card' */
+.talent-vinyl--5 .talent-card{
+  /* preserve existing card sizing; this rule won't change widths */
+  box-shadow: none; /* inner cards shouldn't double-shadow with outer mask */
+}
 }
