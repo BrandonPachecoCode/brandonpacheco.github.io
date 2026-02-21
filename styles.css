@@ -218,7 +218,67 @@ h2 { margin: 0 0 1rem; font-size: 1.25rem; letter-spacing: -0.01em; }
   background: rgba(255,255,255,0.85);
   box-shadow: 10px 0 0 rgba(255,255,255,0.55), 20px 0 0 rgba(255,255,255,0.35);
 }
+/* === Balanced spacing around Talent section ===
+   Ensures header -> talent and talent -> hint distances are the same.
+   Put this at the end of your styles.css or in the page <style> so it overrides earlier rules.
+*/
+:root{
+  --section-gap: 2.2rem; /* tweak this once to change both gaps */
+}
 
+/* Reduce the huge top padding coming from .container/header on this page and keep consistent rhythm */
+header {
+  /* keep some top padding but smaller than original so title sits higher */
+  padding-top: 2.5rem !important;
+  padding-bottom: 0 !important;
+}
+
+/* Make subtitle -> next section use our section gap */
+header p.subtitle,
+.container > header p.subtitle {
+  margin-bottom: var(--section-gap) !important;
+}
+
+/* Place the hint (talent-head) so it sits the same distance below the carousel as the carousel sits below the header.
+   We set a top offset on the viewport, and keep the talent-head above the viewport. */
+.talent-viewport {
+  /* remove negative offsets that were pushing the viewport out of rhythm */
+  margin-top: 0 !important;
+}
+
+/* Move the talent-head (hint + arrows) so it sits exactly one section-gap above the viewport.
+   Because talent-head is visually *above* the viewport in your markup, we give it margin-bottom to control spacing
+   between it and the carousel. */
+.talent-head {
+  margin-top: 0 !important;        /* don't stack extra above the head */
+  margin-bottom: calc(var(--section-gap) * 0.5) !important; /* smaller space under head for visual balance */
+}
+
+/* Now create a matching gap between the header & the carousel by adding top padding to the wrapper that contains the viewport.
+   This keeps the space above the carousel equal to the subtitle bottom space plus half the head spacing so visually it's balanced. */
+.info-page .talent-card-block,
+.talent-page .container .talent-viewport,
+.talent-viewport {
+  padding-top: calc(var(--section-gap) * 0.5) !important;
+}
+
+/* If you prefer exact equal spacing header -> carousel and carousel -> hint,
+   set both to var(--section-gap) by uncommenting these two lines and comment the rules above */
+/*
+header p.subtitle { margin-bottom: var(--section-gap) !important; }
+.talent-head { margin-bottom: var(--section-gap) !important; }
+.talent-viewport { margin-top: var(--section-gap) !important; }
+*/
+
+/* Tiny responsive tweak so things don't become cramped on mobile */
+@media (max-width: 768px){
+  :root{ --section-gap: 1.3rem; }
+  header { padding-top: 1.25rem !important; }
+  header p.subtitle { margin-bottom: var(--section-gap) !important; }
+  .talent-head { margin-bottom: calc(var(--section-gap) * 0.6) !important; }
+  .info-page .talent-card-block,
+  .talent-viewport { padding-top: calc(var(--section-gap) * 0.5) !important; }
+}
 /* =========================
    INFO PAGE CARDS
 ========================= */
