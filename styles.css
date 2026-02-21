@@ -656,6 +656,65 @@ button:focus, a:focus, .brand-item:focus { box-shadow: 0 0 0 4px rgba(255,134,0,
 /* ensure text blocks inside info cards are visible on mobile */
 .info-card, .work-card, .talent-viewport { -webkit-font-smoothing:antialiased; }
 
+/* ====== Equal top-spacing for Talent / Brands / Latest pages ======
+   Drop this at the end of styles.css (it overrides earlier spacing).
+   Adjust --section-gap to change the spacing globally.
+================================================================== */
+
+:root {
+  --section-gap: 2.2rem; /* change this once to update spacing across pages */
+}
+
+/* Make the page header subtitle spacing consistent */
+header { padding-top: 2.5rem !important; padding-bottom: 0 !important; }
+header p.subtitle,
+.container > header p.subtitle {
+  margin-bottom: var(--section-gap) !important;
+}
+
+/* Target the 3 pages explicitly so it doesn't affect other pages */
+.talent-page .container,
+.brands-page .container,
+.latest-page .container {
+  /* keep container vertical rhythm tighter under the fixed nav */
+  padding-top: 2.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Make the hint (talent-head) sit the same distance below the carousel as the carousel sits below the header */
+.talent-head {
+  /* remove any accidental offsets and use the shared gap */
+  margin-top: 0 !important;
+  margin-bottom: var(--section-gap) !important;
+  position: relative;
+  z-index: 5;
+}
+
+/* Remove negative offset on the viewport that was creating inconsistent spacing */
+.talent-viewport {
+  margin-top: 0 !important;   /* ensure viewport sits exactly after the gap */
+  padding-top: calc(var(--section-gap) * 0.2) !important; /* tiny breathing room */
+}
+
+/* Make small responsive adjustments so mobile also matches the rhythm */
+@media (max-width: 768px) {
+  :root { --section-gap: 1.3rem; }
+
+  header { padding-top: 1.25rem !important; }
+  header p.subtitle { margin-bottom: var(--section-gap) !important; }
+
+  .talent-head { margin-bottom: calc(var(--section-gap) * 0.6) !important; }
+  .talent-viewport { padding-top: calc(var(--section-gap) * 0.5) !important; }
+}
+
+/* Optional quick rule: make Latest use the same wrapper naming if page class differs */
+.container:has(.brands-grid),
+.container:has(.talent-viewport),
+.container:has(.work-grid) {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
 /* =========================
    End of stylesheet
 ========================= */
