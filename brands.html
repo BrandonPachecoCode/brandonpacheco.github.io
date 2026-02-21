@@ -262,15 +262,132 @@
 </main>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // --- helpers: embed conversion ---
+  function toYouTubeEmbed(url) {
+    try {
+      // handle youtu.be short links
+      if (url.includes('youtu.be/')) {
+        const id = url.split('youtu.be/')[1].split(/[?&]/)[0];
+        return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      }
+      // handle full watch links
+      const u = new URL(url);
+      const id = u.searchParams.get('v');
+      if (id) return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      // handle embed or already embed
+      if (url.includes('/embed/')) return url + (url.includes('?') ? '&autoplay=1' : '?autoplay=1');
+      return url;
+    } catch (err) { return url; }
+  }
 
-<script>
-document.querySelectorAll(".brand-item").forEach(item => {
-  item.addEventListener("click", () => {
-    const url = item.dataset.video || item.dataset.url;
-    if (!url) return;
+  function toInstagramEmbed(url) {
+    // basic conversion: https://www.instagram.com/reel/ID/ -> /embed/
+    try {
+      const m = url.match(/(\/(p|reel|tv)\/[^\/]+)\/?/);
+      if (m && m[1]) {
+        return `https://www.instagram.com${m[1]}/embed/`;
+      }
+      return url;
+    } catch (err) { return url; }
+  }
 
-    // open in new tab (simple & reliable)
-    window.open(url, "_blank", "noopener");
+  // --- modal references (if present) ---
+  const modal = document.getElementById('video-modal');
+  const modalContent = modal ? modal.querySelector('.video-modal-content') : null;
+  const frame = modal ? modal.querySelector('.video-frame') : null;
+  const closeBtn = modal ? modal.querySelector('.video-close') : null;
+
+  function showModal(embedUrl, orientation = 'portrait') {
+    if (!modal || !frame || !modalContent) {
+      // fallback: open new tab
+      window.open(embedUrl, '_blank', 'noopener');
+      return;
+    }
+    // mark orientation
+    modalContent.classList.toggle('landscape', orientation === 'landscape');
+
+    frame.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Video player"></iframe>`;
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (frame) frame.innerHTML = '';
+    if (modalContent) modalContent.classList.remove('landscape');
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) hideModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') hideModal();
+    });
+  }
+
+  // --- click handler (works for <a class="brand-link"> and inner .brand-item) ---
+  const brandEls = Array.from(document.querySelectorAll('.brand-link, .brand-item'));
+  if (!brandEls.length) console.warn('[BRANDS] no .brand-link or .brand-item found.');
+
+  brandEls.forEach(el => {
+    // ensure inner element is clickable
+    el.style.cursor = 'pointer';
+    el.style.pointerEvents = 'auto';
+
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      // try several places for the url:
+      // 1) data-video on the clicked element
+      // 2) if clicked element inside an <a class="brand-link">, use that anchor's dataset
+      // 3) data-video on a child with data
+      // 4) href (anchor)
+      let url = el.dataset && el.dataset.video ? el.dataset.video.trim() : '';
+      if (!url) {
+        const anchor = el.closest && el.closest('a.brand-link');
+        if (anchor && anchor.dataset && anchor.dataset.video) url = anchor.dataset.video.trim();
+      }
+      if (!url && el.querySelector) {
+        const child = el.querySelector('[data-video]');
+        if (child) url = child.dataset.video.trim();
+      }
+      if (!url && el.getAttribute) {
+        const href = el.getAttribute('href');
+        if (href && href !== '#') url = href.trim();
+      }
+
+      if (!url) {
+        console.warn('[BRANDS] clicked element has no data-video or href:', el);
+        return;
+      }
+
+      // decide embed vs fallback
+      const isYouTube = /youtube\.com|youtu\.be/.test(url);
+      const isInstagram = /instagram\.com/.test(url);
+
+      let embedUrl = url;
+      let orientation = (el.dataset && el.dataset.orientation) || (el.closest ? (el.closest('a.brand-link')?.dataset?.orientation) : '') || '';
+
+      if (isYouTube) embedUrl = toYouTubeEmbed(url);
+      else if (isInstagram) embedUrl = toInstagramEmbed(url);
+
+      // if orientation not set, prefer landscape for youtube, portrait for IG
+      if (!orientation) orientation = isYouTube ? 'landscape' : (isInstagram ? 'portrait' : '');
+
+      // show modal if available, otherwise open new tab
+      showModal(embedUrl, orientation);
+    }, { passive: false });
   });
+
 });
 </script>
+
