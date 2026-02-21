@@ -69,6 +69,9 @@
       line-height: 1;
       cursor: pointer;
     }
+
+    /* small safety: ensure brand-item clicks feel interactive */
+    .brand-item { cursor: pointer; }
   </style>
 </head>
 
@@ -89,35 +92,37 @@
 <main class="container brands-page">
   <div class="brands-grid">
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C06-lMvoay8/">
+    <!-- NOTE: href is set to the real video URL so users can right-click / open in new tab -->
+    <a class="brand-link" href="https://www.instagram.com/reel/C06-lMvoay8/" data-video="https://www.instagram.com/reel/C06-lMvoay8/">
       <div class="brand-item"><img src="logos/aardman.png" alt="Aardman"><span class="brand-name">Aardman</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/CyBfcSGtN7G/">
+    <a class="brand-link" href="https://www.instagram.com/reel/CyBfcSGtN7G/" data-video="https://www.instagram.com/reel/CyBfcSGtN7G/">
       <div class="brand-item"><img src="logos/adidas.png" alt="Adidas"><span class="brand-name">Adidas</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DDFWSKWNGGU/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DDFWSKWNGGU/" data-video="https://www.instagram.com/reel/DDFWSKWNGGU/">
       <div class="brand-item"><img src="logos/google.png" alt="Google"><span class="brand-name">Google</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DEFQuGOIX-w/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DEFQuGOIX-w/" data-video="https://www.instagram.com/reel/DEFQuGOIX-w/">
       <div class="brand-item"><img src="logos/hello-fresh.png" alt="HelloFresh"><span class="brand-name">HelloFresh</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DMQUysXIRP0/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DMQUysXIRP0/" data-video="https://www.instagram.com/reel/DMQUysXIRP0/">
       <div class="brand-item"><img src="logos/apple.png" alt="Apple"><span class="brand-name">Apple</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C3F3P39ocMy/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C3F3P39ocMy/" data-video="https://www.instagram.com/reel/C3F3P39ocMy/">
       <div class="brand-item"><img src="logos/bbc.png" alt="BBC"><span class="brand-name">BBC</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DLkijNYo1Pi/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DLkijNYo1Pi/" data-video="https://www.instagram.com/reel/DLkijNYo1Pi/">
       <div class="brand-item"><img src="logos/cheez-it.png" alt="Cheez-It"><span class="brand-name">Cheez-It</span></div>
     </a>
 
-    <a class="brand-link" href="#"
+    <a class="brand-link"
+       href="https://www.youtube.com/watch?v=063FqEfBTns"
        data-video="https://www.youtube.com/watch?v=063FqEfBTns"
        data-orientation="landscape">
       <div class="brand-item">
@@ -126,140 +131,149 @@
       </div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DR4tv4viD6X/">
+    <!-- ... rest of the items updated the same way ... -->
+    <a class="brand-link" href="https://www.instagram.com/reel/DR4tv4viD6X/" data-video="https://www.instagram.com/reel/DR4tv4viD6X/">
       <div class="brand-item"><img src="logos/volvo.png" alt="Volvo"><span class="brand-name">Volvo</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C_U-qBbuzJd/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C_U-qBbuzJd/" data-video="https://www.instagram.com/reel/C_U-qBbuzJd/">
       <div class="brand-item"><img src="logos/comfort-cases.png" alt="Comfort Cases"><span class="brand-name">Comfort Cases</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DQOe8tajP5D/">
+    <a class="brand-link" href="https://www.instagram.com/p/DQOe8tajP5D/" data-video="https://www.instagram.com/p/DQOe8tajP5D/">
       <div class="brand-item"><img src="logos/disney.png" alt="Disney"><span class="brand-name">Disney</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DL5OrTTIT_h/">
+    <a class="brand-link" href="https://www.instagram.com/p/DL5OrTTIT_h/" data-video="https://www.instagram.com/p/DL5OrTTIT_h/">
       <div class="brand-item"><img src="logos/american-express.png" alt="American Express"><span class="brand-name">American Express</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DQgnmRfjS18/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DQgnmRfjS18/" data-video="https://www.instagram.com/reel/DQgnmRfjS18/">
       <div class="brand-item"><img src="logos/epic-games.png" alt="Epic Games"><span class="brand-name">Epic Games</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7j-kYpt5w1/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C7j-kYpt5w1/" data-video="https://www.instagram.com/reel/C7j-kYpt5w1/">
       <div class="brand-item"><img src="logos/lego.png" alt="LEGO"><span class="brand-name">LEGO</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCzbrn7tGmG/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DCzbrn7tGmG/" data-video="https://www.instagram.com/reel/DCzbrn7tGmG/">
       <div class="brand-item"><img src="logos/tesco.png" alt="Tesco" /><span class="brand-name">Tesco</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DNgPKlmI9PB/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DNgPKlmI9PB/" data-video="https://www.instagram.com/reel/DNgPKlmI9PB/">
       <div class="brand-item"><img src="logos/staedtler.png" alt="STAEDTLER" /><span class="brand-name">STAEDTLER</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DHL_BcpIcNg/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DHL_BcpIcNg/" data-video="https://www.instagram.com/reel/DHL_BcpIcNg/">
       <div class="brand-item"><img src="logos/crufts.png" alt="Crufts"><span class="brand-name">Crufts</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DKEjAR8o9hC/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DKEjAR8o9hC/" data-video="https://www.instagram.com/reel/DKEjAR8o9hC/">
       <div class="brand-item"><img src="logos/dairylea.png" alt="Dairylea"><span class="brand-name">Dairylea</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7YrW0xMfvM/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C7YrW0xMfvM/" data-video="https://www.instagram.com/reel/C7YrW0xMfvM/">
       <div class="brand-item"><img src="logos/deichmann.png" alt="Deichmann"><span class="brand-name">Deichmann</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DKpU-lBNwze/">
+    <a class="brand-link" href="https://www.instagram.com/p/DKpU-lBNwze/" data-video="https://www.instagram.com/p/DKpU-lBNwze/">
       <div class="brand-item"><img src="logos/happy-mum-happy-baby.png" alt="HAPPY MUM HAPPY BABY"><span class="brand-name">HAPPY MUM HAPPY BABY</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DPjaD9PiJlJ/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DPjaD9PiJlJ/" data-video="https://www.instagram.com/reel/DPjaD9PiJlJ/">
       <div class="brand-item"><img src="logos/deliveroo.png" alt="Deliveroo"><span class="brand-name">Deliveroo</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DJtMkccMuHU/">
+    <a class="brand-link" href="https://www.instagram.com/p/DJtMkccMuHU/" data-video="https://www.instagram.com/p/DJtMkccMuHU/">
       <div class="brand-item"><img src="logos/ancient&brave.png" alt="Ancient & Brave"><span class="brand-name">Ancient & Brave</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C22lBJEt-Gd/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C22lBJEt-Gd/" data-video="https://www.instagram.com/reel/C22lBJEt-Gd/">
       <div class="brand-item"><img src="logos/888-poker.png" alt="888 Poker"><span class="brand-name">888 Poker</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DNfUnx8s2pR/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DNfUnx8s2pR/" data-video="https://www.instagram.com/reel/DNfUnx8s2pR/">
       <div class="brand-item"><img src="logos/cotton-traders.png" alt="Cotton Traders"><span class="brand-name">Cotton Traders</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCmkFeUNIlF/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DCmkFeUNIlF/" data-video="https://www.instagram.com/reel/DCmkFeUNIlF/">
       <div class="brand-item"><img src="logos/dreamtoys.png" alt="DreamToys"><span class="brand-name">DreamToys</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCPLwZiIa5N/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DCPLwZiIa5N/" data-video="https://www.instagram.com/reel/DCPLwZiIa5N/">
       <div class="brand-item"><img src="logos/garnier.png" alt="Garnier"><span class="brand-name">Garnier</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C84sKlctwQ9/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C84sKlctwQ9/" data-video="https://www.instagram.com/reel/C84sKlctwQ9/">
       <div class="brand-item"><img src="logos/zarbees.png" alt="Zarbee’s"><span class="brand-name">Zarbee’s</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/DMA-gILtg05/">
+    <a class="brand-link" href="https://www.instagram.com/p/DMA-gILtg05/" data-video="https://www.instagram.com/p/DMA-gILtg05/">
       <div class="brand-item"><img src="logos/happy-place.png" alt="Happy Place"><span class="brand-name">Happy Place</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C5Bq677tv3x/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C5Bq677tv3x/" data-video="https://www.instagram.com/reel/C5Bq677tv3x/">
       <div class="brand-item"><img src="logos/invisilign.png" alt="Invisalign"><span class="brand-name">Invisalign</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DIJ6pvPIgZ_/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DIJ6pvPIgZ_/" data-video="https://www.instagram.com/reel/DIJ6pvPIgZ_/">
       <div class="brand-item"><img src="logos/nip+fab.png" alt="NIP+FAB"><span class="brand-name">NIP+FAB</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7jw3sCI04-/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C7jw3sCI04-/" data-video="https://www.instagram.com/reel/C7jw3sCI04-/">
       <div class="brand-item"><img src="logos/regatta.png" alt="Regatta"><span class="brand-name">RegATTA</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DOWWds9jTnj/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DOWWds9jTnj/" data-video="https://www.instagram.com/reel/DOWWds9jTnj/">
       <div class="brand-item"><img src="logos/rocks.png" alt="Rocks"><span class="brand-name">Rocks</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.youtube.com/watch?v=eO0FUfOgP98">
+    <a class="brand-link" href="https://www.youtube.com/watch?v=eO0FUfOgP98" data-video="https://www.youtube.com/watch?v=eO0FUfOgP98">
       <div class="brand-item"><img src="logos/santander.png" alt="Santander"><span class="brand-name">Santander</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DKoePGXo24X/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DKoePGXo24X/" data-video="https://www.instagram.com/reel/DKoePGXo24X/">
       <div class="brand-item"><img src="logos/tough-mudder.png" alt="Tough Mudder"><span class="brand-name">Tough Mudder</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DHLdCDhMlVw/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DHLdCDhMlVw/" data-video="https://www.instagram.com/reel/DHLdCDhMlVw/">
       <div class="brand-item"><img src="logos/trinny-london.png" alt="Trinny London"><span class="brand-name">Trinny London</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCFFZq9N2ol/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DCFFZq9N2ol/" data-video="https://www.instagram.com/reel/DCFFZq9N2ol/">
       <div class="brand-item"><img src="logos/unilever.png" alt="Unilever"><span class="brand-name">Unilever</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DRtx1EyDKxh/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DRtx1EyDKxh/" data-video="https://www.instagram.com/reel/DRtx1EyDKxh/">
       <div class="brand-item"><img src="logos/vax.png" alt="VAX"><span class="brand-name">VAX</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/p/C9AfO4pInnB/">
+    <a class="brand-link" href="https://www.instagram.com/p/C9AfO4pInnB/" data-video="https://www.instagram.com/p/C9AfO4pInnB/">
       <div class="brand-item"><img src="logos/vodafone.png" alt="Vodafone"><span class="brand-name">Vodafone</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C7Uab61NuVU/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C7Uab61NuVU/" data-video="https://www.instagram.com/reel/C7Uab61NuVU/">
       <div class="brand-item"><img src="logos/which.png" alt="Which?"><span class="brand-name">Which?</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/C8e8vbDIS0K/">
+    <a class="brand-link" href="https://www.instagram.com/reel/C8e8vbDIS0K/" data-video="https://www.instagram.com/reel/C8e8vbDIS0K/">
       <div class="brand-item"><img src="logos/wild-nutrition.png" alt="Wild Nutrition"><span class="brand-name">Wild Nutrition</span></div>
     </a>
 
-    <a class="brand-link" href="#" data-video="https://www.instagram.com/reel/DCUennVIYAp/">
+    <a class="brand-link" href="https://www.instagram.com/reel/DCUennVIYAp/" data-video="https://www.instagram.com/reel/DCUennVIYAp/">
       <div class="brand-item"><img src="logos/foodspring.png" alt="foodSpring"><span class="brand-name">foodSpring</span></div>
     </a>
 
   </div>
 </main>
+
+<!-- VIDEO MODAL (inserted once, used for YouTube embeds) -->
+<div id="video-modal" class="video-modal" aria-hidden="true">
+  <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="video-close" aria-label="Close video" type="button">×</button>
+    <div class="video-frame"></div>
+  </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -307,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // mark orientation
     modalContent.classList.toggle('landscape', orientation === 'landscape');
 
+    // create iframe (YouTube works reliably)
     frame.innerHTML = `<iframe src="${embedUrl}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Video player"></iframe>`;
 
     modal.classList.add('active');
@@ -333,61 +348,98 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- click handler (works for <a class="brand-link"> and inner .brand-item) ---
-  const brandEls = Array.from(document.querySelectorAll('.brand-link, .brand-item'));
-  if (!brandEls.length) console.warn('[BRANDS] no .brand-link or .brand-item found.');
+  // --- click handler for each brand link / inner box ---
+  // we select anchors (primary) and also allow clicking the inner .brand-item
+  const anchors = Array.from(document.querySelectorAll('a.brand-link'));
 
-  brandEls.forEach(el => {
-    // ensure inner element is clickable
-    el.style.cursor = 'pointer';
-    el.style.pointerEvents = 'auto';
+  if (!anchors.length) console.warn('[BRANDS] no .brand-link anchors found.');
 
-    el.addEventListener('click', (ev) => {
+  anchors.forEach(a => {
+    // ensure anchor target is current URL (already set). But we intercept the click to open modal for YouTube.
+    a.addEventListener('click', (ev) => {
+      // allow middle click / cmd-click / ctrl-click to open in new tab normally
+      if (ev.button === 1 || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+
       ev.preventDefault();
-      ev.stopPropagation();
 
-      // try several places for the url:
-      // 1) data-video on the clicked element
-      // 2) if clicked element inside an <a class="brand-link">, use that anchor's dataset
-      // 3) data-video on a child with data
-      // 4) href (anchor)
-      let url = el.dataset && el.dataset.video ? el.dataset.video.trim() : '';
+      const url = (a.dataset && a.dataset.video) ? a.dataset.video.trim() : (a.href && a.href !== '#' ? a.href.trim() : '');
       if (!url) {
-        const anchor = el.closest && el.closest('a.brand-link');
-        if (anchor && anchor.dataset && anchor.dataset.video) url = anchor.dataset.video.trim();
-      }
-      if (!url && el.querySelector) {
-        const child = el.querySelector('[data-video]');
-        if (child) url = child.dataset.video.trim();
-      }
-      if (!url && el.getAttribute) {
-        const href = el.getAttribute('href');
-        if (href && href !== '#') url = href.trim();
-      }
-
-      if (!url) {
-        console.warn('[BRANDS] clicked element has no data-video or href:', el);
+        // fallback: allow default navigation
+        window.open(a.href || '#', '_blank');
         return;
       }
 
-      // decide embed vs fallback
       const isYouTube = /youtube\.com|youtu\.be/.test(url);
       const isInstagram = /instagram\.com/.test(url);
 
-      let embedUrl = url;
-      let orientation = (el.dataset && el.dataset.orientation) || (el.closest ? (el.closest('a.brand-link')?.dataset?.orientation) : '') || '';
+      // prefer explicit orientation if present on anchor
+      const orientation = a.dataset.orientation || (isYouTube ? 'landscape' : (isInstagram ? 'portrait' : 'portrait'));
 
-      if (isYouTube) embedUrl = toYouTubeEmbed(url);
-      else if (isInstagram) embedUrl = toInstagramEmbed(url);
+      if (isYouTube) {
+        const embed = toYouTubeEmbed(url);
+        showModal(embed, orientation);
+        return;
+      }
 
-      // if orientation not set, prefer landscape for youtube, portrait for IG
-      if (!orientation) orientation = isYouTube ? 'landscape' : (isInstagram ? 'portrait' : '');
+      // Instagram: don't attempt to embed inside an iframe (likely blocked).
+      // Instead open the direct Instagram URL in a new tab for fastest access.
+      if (isInstagram) {
+        window.open(url, '_blank', 'noopener');
+        return;
+      }
 
-      // show modal if available, otherwise open new tab
-      showModal(embedUrl, orientation);
+      // Fallback: open in new tab
+      window.open(url, '_blank', 'noopener');
     }, { passive: false });
+
+    // also allow click on inner .brand-item to bubble to anchor
+    const inner = a.querySelector('.brand-item');
+    if (inner) {
+      inner.addEventListener('click', (ev) => {
+        // delegate to the anchor's click handler (simulate a click)
+        // If user performs modifier-click, allow default (open new tab)
+        if (ev.button === 1 || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+        ev.preventDefault();
+        a.click();
+      }, { passive: false });
+    }
   });
 
 });
 </script>
+
+<footer class="footer">
+
+  <div class="footer-inner">
+
+    <div class="contact-item">
+      <span class="contact-label">Contact</span>
+      <a class="contact-pill" href="mailto:brandonchopas@icloud.com">
+        brandonchopas@icloud.com
+      </a>
+    </div>
+
+    <a
+      class="instagram-contact"
+      href="https://www.instagram.com/brandonpachecoh/"
+      target="_blank"
+      rel="noopener"
+    >
+      <span class="contact-label">Behind the scenes</span>
+
+      <div class="instagram-pill">
+        <img
+          src="logos/instagram-logo.png"
+          alt="Instagram"
+          class="instagram-icon"
+        />
+        <span class="instagram-text">@brandonpachecoh</span>
+      </div>
+    </a>
+
+  </div>
+
+</footer>
+</body>
+</html>
 
