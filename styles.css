@@ -652,7 +652,56 @@ footer, .footer {
     text-align: left;
   }
 }
+/* ===== TALENT: horizontal touch / smooth scrolling improvements ===== */
 
+/* Make sure the page doesn't allow accidental horizontal pan */
+html, body {
+  overscroll-behavior-x: none; /* avoid page-level horizontal bounce */
+}
+
+/* Scroller container: allow children to overflow horizontally but keep viewport visual */
+.talent-viewport {
+  position: relative;
+  overflow: visible;       /* we want controls/hint to show outside */
+  -webkit-overflow-scrolling: auto;
+  will-change: transform;
+}
+
+/* Inner scroller (the actual strip that scrolls) */
+.talent-vinyl {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;            /* horizontal scroll */
+  overflow-y: hidden;          /* prevent vertical inside the scroller */
+  scroll-behavior: smooth;     /* smooth programmatic scroll */
+  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+  scroll-snap-type: x proximity;/* optional snap UX */
+  overscroll-behavior-x: contain; /* keep overscroll inside scroller */
+  -ms-overflow-style: none;    /* hide IE scrollbar visuals */
+  scrollbar-width: none;       /* hide Firefox scrollbar */
+  touch-action: pan-x;         /* tell UA we intend horizontal panning */
+  padding: 14px 12px 18px;
+  border-radius: 22px;
+  box-sizing: border-box;
+}
+.talent-vinyl::-webkit-scrollbar { display: none; }
+
+/* Make each card an optional snap point (better feel on touch) */
+.talent-vinyl--5 .talent-card {
+  scroll-snap-align: center;
+}
+
+/* Visual hint: make the cards remain clipped inside the rounded shape */
+.talent-vinyl { border-radius: 22px; }
+
+/* Cursor affordance for desktops */
+.talent-vinyl.grabbing { cursor: grabbing; cursor: -webkit-grabbing; }
+.talent-vinyl { cursor: grab; cursor: -webkit-grab; }
+
+/* On very narrow phones keep single card width */
+@media (max-width: 480px) {
+  .talent-vinyl--5 .talent-card { width: 86vw; }
+}
 /* =========================
    RESPONSIVE: mobile tweaks for talent scroller
 ========================= */
