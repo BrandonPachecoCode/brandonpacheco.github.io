@@ -704,7 +704,7 @@ header p.subtitle,
   header p.subtitle { margin-bottom: var(--section-gap) !important; }
 
   .talent-head { margin-bottom: calc(var(--section-gap) * 0.6) !important; }
-  .talent-viewport { padding-top: calc(var(--section-gap) * 0.5) !important; }
+  .talent-viewport { padding-top: calc(var(--section-gap) * 0.6) !important; }
 }
 
 /* Optional quick rule: make Latest use the same wrapper naming if page class differs */
