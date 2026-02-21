@@ -1,234 +1,194 @@
 /* =========================
-   BRANDONPACHECO.COM — CLEAN FULL CSS
-   - Deduped mobile rules
-   - Fixed color consistency (headings black, body text black by default)
-   - Kept your orange subtitle system + chat bubble orange text
-   - Brands logos stay bright (no global filters)
+   BRANDONPACHECO.COM — COMPLETE CSS
+   - Single-file stylesheet: desktop + responsive mobile
+   - Animations removed where they hid content
+   - Talent scroller fixed (horizontal touch, snapping, controls outside mask)
+   - Brands click/hover styles preserved
+   - Mobile spacing reduced so page sits under fixed nav
 ========================= */
 
 /* =========================
    GLOBAL / BASE
 ========================= */
-*{ box-sizing:border-box; }
+* { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 
 :root{
-  --bg:#CCDAD1;           /* full website background */
-  --window:#E0E6E2;       /* “windows” / cards */
-  --accent:#FF8600;       /* details / menu */
-  --subtitle:#FF8500;     /* subtitles only */
-  --text:#0b0b0b;
-  --text-muted:rgba(11,11,11,.65);
-  --stroke:rgba(11,11,11,.10);
-  --shadow:0 24px 70px rgba(0,0,0,.18);
+  --bg: #CCDAD1;        /* full website background */
+  --window: #E0E6E2;    /* “windows” / cards */
+  --accent: #FF8600;    /* details / wraps / menu */
+  --subtitle: #FF8500;  /* subtitles ONLY */
+  --text: #0b0b0b;
+  --text-muted: rgba(11,11,11,.65);
+  --stroke: rgba(11,11,11,.10);
+  --shadow: 0 24px 70px rgba(0,0,0,.18);
 }
 
-html,body{ height:100%; }
+html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+
+/* keep page from accidental horizontal pan */
+html, body { overflow-x: hidden; overscroll-behavior-x: none; }
 
 body{
-  margin:0;
-  min-height:100%;
-  padding-top:64px; /* space for fixed nav */
-  background:var(--bg);
-  color:var(--text); /* ✅ default text is black */
-  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  margin: 0;
+  min-height: 100%;
+  padding-top: 64px; /* space for fixed nav */
+  background: var(--bg);
+  color: var(--text); /* default text black */
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 /* =========================
    TYPO / GLOBAL RULES
 ========================= */
-h1,h2,h3,.title,.work-title{ color:var(--text); }
+h1, h2, h3, .title, .work-title { color: var(--text); margin: 0; }
 
 .subtitle,
 header p.subtitle,
 header > p,
 h1 + p,
-h2 + p{
-  color:var(--subtitle) !important;
+h2 + p {
+  color: var(--subtitle) !important;
+  opacity: 1 !important;
 }
+
+/* small helpers */
+.container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; box-sizing: border-box; }
+.hidden { display: none !important; }
 
 /* =========================
    TOP NAV
 ========================= */
 .top-nav{
-  position:fixed;
-  top:0; left:0; right:0;
-  height:64px;
-  z-index:1000;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  z-index: 1100;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
 
-  background:rgba(224,230,226,.85);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--stroke);
+  background: rgba(224,230,226,.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--stroke);
+  box-sizing: border-box;
 }
 
 .nav-link{
-  text-decoration:none;
-  font-weight:800;
-  color:rgba(11,11,11,.70);
-  padding:10px 14px;
-  border-radius:999px;
-  transition:background .18s ease,color .18s ease,transform .18s ease;
+  text-decoration: none;
+  font-weight: 800;
+  color: rgba(11,11,11,.70);
+  padding: 10px 14px;
+  border-radius: 999px;
+  transition: background .18s ease, color .18s ease, transform .18s ease;
 }
 
-.nav-link:hover{
-  background:rgba(255,255,255,.55);
-  transform:translateY(-1px);
-}
+.nav-link:hover{ background: rgba(255,255,255,.55); transform: translateY(-1px); }
+.nav-link.active{ background: var(--accent); color: #fff; }
 
-.nav-link.active{
-  background:var(--accent);
-  color:#fff;
-}
-
-/* Optional: orange detail wrap */
-.detail-wrap{
-  border:1px solid rgba(255,134,0,.45);
-  box-shadow:0 18px 60px rgba(255,134,0,.12);
-}
+/* Optional: orange “detail wrap” */
+.detail-wrap{ border: 1px solid rgba(255,134,0,.45); box-shadow: 0 18px 60px rgba(255,134,0,.12); }
 
 /* =========================
-   LAYOUT
+   LAYOUT / TYPO
 ========================= */
-.container{
-  max-width:1100px;
-  margin:0 auto;
-  padding:4rem 1.5rem;
+header { text-align: center; padding-top: 6rem; }
+
+h1 {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.03em;
 }
 
-header{
-  text-align:center;
-  padding-top:6rem;
+p.subtitle {
+  margin: 0 auto 2.4rem;
+  max-width: 58ch;
+  font-size: 1.05rem;
 }
 
-h1{
-  font-size:clamp(2.4rem,4vw,3.4rem);
-  line-height:1.05;
-  margin:0 0 .6rem;
-  letter-spacing:-.03em;
-}
-
-p.subtitle{
-  margin:0 auto 2.4rem;
-  max-width:58ch;
-  font-size:1.05rem;
-}
-
-h2{
-  margin:0 0 1rem;
-  font-size:1.25rem;
-  letter-spacing:-.01em;
-}
+h2 { margin: 0 0 1rem; font-size: 1.25rem; letter-spacing: -0.01em; }
 
 /* =========================
    BUTTONS
 ========================= */
-.button{
-  display:inline-block;
-  margin-top:1rem;
-  padding:.75rem 1.5rem;
-  background:#fff;
-  color:#000;
-  text-decoration:none;
-  border-radius:999px;
-  font-weight:700;
-  letter-spacing:.01em;
+.button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
-.button:hover{ opacity:.9; }
+.button:hover { opacity: 0.9; }
 
 /* =========================
    REEL LAYOUT
 ========================= */
-.reel-layout{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:4rem;
-}
-
+.reel-layout{ display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
 .reel-video{ display:flex; justify-content:flex-start; }
 
-.video-portrait{
-  position:relative;
-  width:320px;
-  aspect-ratio:9 / 16;
-  border-radius:20px;
-  overflow:hidden;
-  background:#000;
-}
+.video-portrait{ position: relative; width: 320px; aspect-ratio: 9/16; border-radius: 20px; overflow: hidden; background: #000; }
+.video-portrait iframe{ width:100%; height:100%; border:none; }
 
-.video-portrait iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-.reel-text{
-  display:flex;
-  flex-direction:column;
-  gap:.35rem;
-}
-
-.reel-text p{
-  font-size:1.6rem;
-  font-weight:600;
-  letter-spacing:.04em;
-  color:#fff;
-  line-height:1.15;
-  margin:0;
-}
+.reel-text{ display:flex; flex-direction:column; gap: .35rem; }
+.reel-text p{ font-size: 1.6rem; font-weight:600; letter-spacing:.04em; color:#fff; line-height:1.15; margin:0; }
 
 /* =========================
    HERO (IMAGE + CHAT BUBBLES)
+   — animations removed so text is readable by default
 ========================= */
-.hero{
-  padding-top:1.25rem;
-  padding-bottom:2.25rem;
+.hero { padding-top: 1.25rem; padding-bottom: 2.25rem; }
+
+.hero-photo {
+  position: relative;
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
 }
 
-.hero-photo{
-  position:relative;
-  width:min(100%,1100px);
-  margin:0 auto;
-  border-radius:24px;
-  overflow:hidden;
-  background:rgba(255,255,255,0.02);
+.hero-photo img { width:100%; height:auto; display:block; filter:none !important; opacity:1 !important; mix-blend-mode:normal !important; }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.6rem, 4vw, 3rem);
+  z-index: 2;
+  pointer-events: none;
+  transform: translateY(15%);
 }
 
-/* keep image bright */
-.hero-photo img{
-  width:100%;
-  height:auto;
-  display:block;
-  filter:none !important;
-  opacity:1 !important;
-  mix-blend-mode:normal !important;
-}
+.hero-bubbles { display:flex; flex-direction:column; gap:22px; width:min(720px,100%); }
 
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
+/* title chip (always visible) */
+.title-chip{
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:clamp(1.6rem,4vw,3rem);
-  z-index:2;
-  pointer-events:none;
-  transform:translateY(15%);
+  padding:12px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.95);
+  color:#0b0b0b;
+  font-weight:900;
+  font-size:1rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.06);
 }
 
-.hero-bubbles{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-  width:min(720px,100%);
-}
-
-/* TITLE CHIPS (no bubble wrap) */
-.hero-bubble{
+/* base bubble — visible by default (no opacity=0 states) */
+.hero-bubble {
   position: relative;
   max-width: 92%;
   padding: 14px 18px;
@@ -242,163 +202,78 @@ h2{
   border: 1px solid rgba(255,255,255,.12);
   box-shadow: 0 18px 60px rgba(0,0,0,.55);
 
-  /* visible by default — no animation */
-  opacity: 1;
-  transform: none;
-  filter: none;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
 }
 
-.title-chip{
-  flex:0 0 auto;
-  white-space:nowrap;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:12px 18px;
-  border-radius:999px;
-
-  background:rgba(255,255,255,.95);
-  color:#0b0b0b;
-
-  font-weight:900;
-  font-size:1rem;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.35),
-    inset 0 0 0 1px rgba(0,0,0,.06);
-}
-
-/* Base bubble look */
-.hero-bubble{
-  position:relative;
-  max-width:92%;
-  padding:14px 18px;
-  border-radius:18px;
-  font-size:.95rem;
-  line-height:1.55;
-
-  color:var(--subtitle);
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 18px 60px rgba(0,0,0,.55);
-
-  opacity:0;
-  transform:translateY(18px) scale(.985);
-  filter:blur(0);
-
-  transition:
-    opacity 220ms ease,
-    transform 420ms cubic-bezier(.2,.9,.2,1);
-}
-
-/* push bio text box lower (not chips) */
-.hero-bubble.bio{ margin-top:80px; }
-
-@keyframes bubblePop{
-  0%{ transform:translateY(18px) scale(.985); }
-  55%{ transform:translateY(-6px) scale(1.015); }
-  78%{ transform:translateY(2px) scale(.995); }
-  100%{ transform:translateY(0) scale(1); }
-}
-
-/* Typing dots */
-.hero-bubble.is-typing{
-  opacity:1;
-  transform:translateY(6px) scale(.985);
-  color:transparent;
-}
-
-@keyframes typingDots{
-  0%,100%{ transform:translateY(0); opacity:.65; }
-  50%{ transform:translateY(-2px); opacity:1; }
+/* typing style (kept but won't hide content) */
+.hero-bubble.is-typing::after{
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 6px; height: 6px; border-radius: 999px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 10px 0 0 rgba(255,255,255,0.55), 20px 0 0 rgba(255,255,255,0.35);
 }
 
 /* =========================
    INFO PAGE CARDS
 ========================= */
-.info-page{
-  display:grid;
-  gap:1.25rem;
-  margin-top:-1.25rem;
+.info-page { display: grid; gap: 1.25rem; margin-top: -1.25rem; }
+
+.info-card {
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
+  padding: 1.25rem;
 }
 
-.info-card{
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.04);
-  border-radius:18px;
-  padding:1.25rem;
-}
-
-.info-card ul{
-  margin:.5rem 0 0;
-  padding-left:1.2rem;
-  color:rgba(245,245,245,.78);
-}
+.info-card ul { margin: .5rem 0 0; padding-left: 1.2rem; color: rgba(245,245,245,.78); }
 
 /* =========================
    BRANDS PAGE
 ========================= */
-.brands-page{
-  display:flex;
-  justify-content:center;
-  position:relative;
-  margin-top:.5rem;
-  border-top:1px solid rgba(255,255,255,.06);
-  padding-top:2.5rem;
-}
+.brands-page { display:flex; justify-content:center; position:relative; margin-top:.5rem; border-top:1px solid rgba(255,255,255,.06); padding-top:2.5rem; }
 
-.brands-grid{
+.brands-grid {
   width:100%;
   max-width:1250px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2.6rem 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 2.6rem 2.2rem;
   align-items:center;
 }
 
-.brand-item{
-  position:relative;
+.brand-item {
+  position: relative;
   display:flex;
   justify-content:center;
   align-items:center;
-  animation:fadeUp .45s ease both;
+  cursor: pointer;
+  outline: none;
 }
 
-.brands-grid img{
+.brand-item img {
   max-width:300px;
   max-height:160px;
   width:100%;
   height:auto;
   object-fit:contain;
   margin:0 auto;
-
-  background:rgba(255,255,255,.10);
+  background: rgba(255,255,255,.10);
   padding:34px 40px;
   border-radius:26px;
   border:1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 24px 70px rgba(0,0,0,.60),
-    inset 0 0 0 1px rgba(255,255,255,.06);
-
-  /* if you want true “original logo color”, set these to none/1 */
-  filter:brightness(1.25) contrast(1.1);
-  transition:transform .25s ease,background .25s ease,box-shadow .25s ease,opacity .2s ease;
+  box-shadow: 0 24px 70px rgba(0,0,0,.60), inset 0 0 0 1px rgba(255,255,255,.06);
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease, opacity .2s ease;
 }
 
-.brands-grid img:hover{
-  transform:translateY(-6px) scale(1.02);
-  background:rgba(255,255,255,.14);
-  box-shadow:
-    0 32px 90px rgba(0,0,0,.70),
-    inset 0 0 0 1px rgba(255,255,255,.08);
-}
+.brand-item:hover img { transform: translateY(-6px) scale(1.02); background: rgba(255,255,255,.14); }
 
-.brand-name{
+.brand-name {
   position:absolute;
   left:50%;
   top:50%;
@@ -414,155 +289,130 @@ h2{
   width:90%;
 }
 
-.brand-item:hover .brand-name{ opacity:1; }
-.brand-item:hover img{ opacity:.25; }
+.brand-item:hover .brand-name { opacity: 1; }
+.brand-item:hover img { opacity: .25; }
 
 /* =========================
-   TALENT — 3 VISIBLE (WORKING)
-   Cleaned + controls outside mask
+   TALENT — scroller / cards
+   - Controls sit outside rounded mask
+   - Inner scroller clips images
 ========================= */
 
-/* Head line: contains hint text and arrows (kept as sibling of viewport) */
+/* Head line: contains hint text and arrows - sibling to viewport */
 .talent-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: .75rem;
-  position: relative; /* stacking context for hint/arrows when needed */
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:.75rem;
+  position: relative;
   z-index: 5;
 }
 
-/* Small "scroll or use arrows" hint — we'll position it above the card */
+/* hint placed above the card so it won't be clipped */
 .talent-hint {
   margin: 0;
-  color: rgba(11,11,11,0.55);
+  color: rgba(11,11,11,0.65);
   font-size: .95rem;
   position: absolute;
   left: 12px;
   top: -18px;
   pointer-events: none;
-  z-index: 6;
+  z-index: 7;
 }
 
-/* Arrows container (kept outside the rounded mask visually) */
+/* arrows container outside the rounded area */
 .talent-arrows {
-  display: flex;
-  gap: 10px;
+  display:flex;
+  gap:10px;
   position: absolute;
   right: 12px;
   top: -12px;
-  z-index: 7;
+  z-index: 8;
   pointer-events: auto;
 }
 
-/* Arrow / nav button look */
+/* arrow look */
 .talent-nav {
-  height: 40px;
-  width: 40px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14);
+  height:40px; width:40px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
   background: rgba(0,0,0,.28);
   color: rgba(255,255,255,.95);
-  font-size: 22px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  font-size:22px; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
 }
 .talent-nav:hover { background: rgba(255,255,255,.08); }
 
-/* VIEWPORT
-   - viewport keeps overall positioning and rounded visual BUT allow overflow visible
-     so controls and hint can sit outside the mask without being clipped.
-*/
+/* viewport: visual card (controls outside) */
 .talent-viewport {
   width: min(100%, 1240px);
   margin: 0 auto;
   border-radius: 22px;
   margin-top: -2.5rem;
   position: relative;
-  overflow: visible; /* allow arrows/hint to show above the rounded card */
+  overflow: visible; /* allow controls/hint to show above */
   z-index: 2;
+  box-sizing: border-box;
 }
 
-/* VINYL (inner scroller)
-   - this is the visual card: rounded + overflow hidden so images are clipped
-*/
+/* inner vinyl: the real scroller, clipped and rounded */
 .talent-vinyl {
-  display: flex;
-  gap: 18px;
+  display:flex;
+  gap:18px;
   overflow-x: auto;
-  overflow-y: hidden;   /* prevent vertical scrolling inside the row */
+  overflow-y: hidden;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
-  padding: 14px 2px 16px;
-  border-radius: 22px;  /* same radius so clipping matches viewport */
-  overflow: hidden;     /* clip images to rounded rect */
+  -ms-overflow-style: none;
+  touch-action: pan-x;
+  padding: 14px 12px 16px;
+  border-radius: 22px;
   box-shadow: 0 22px 70px rgba(0,0,0,.55);
 }
 .talent-vinyl::-webkit-scrollbar { display: none; }
 
-/* 3 per view (desktop) */
+/* 3 per view desktop */
 .talent-vinyl--5 .talent-card {
   flex: 0 0 auto;
   width: calc((100% - (18px * 2)) / 3);
   max-width: 400px;
-
   aspect-ratio: 2 / 3;
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.10);
   background: rgba(255,255,255,.06);
-  /* move the shadow to the outer vinyl, inner cards keep subtle */
   box-shadow: none;
   position: relative;
   padding: 0;
   cursor: pointer;
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
+.talent-vinyl--5 .talent-card img { width:100%; height:100%; object-fit:cover; display:block; }
+.talent-vinyl--5 .talent-card:hover { transform: translateY(-10px); background: rgba(255,255,255,.09); box-shadow: 0 34px 110px rgba(0,0,0,.72); }
 
-.talent-vinyl--5 .talent-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.talent-vinyl--5 .talent-card:hover {
-  transform: translateY(-10px);
-  background: rgba(255,255,255,.09);
-  box-shadow: 0 34px 110px rgba(0,0,0,.72);
-}
-
-/* label that appears on hover */
+/* hover label */
 .talent-label {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  padding: 10px 12px;
-  border-radius: 999px;
-  background: rgba(0,0,0,.45);
-  backdrop-filter: blur(10px);
-  color: rgba(255,255,255,.95);
-  font-size: .9rem;
-  font-weight: 800;
-  opacity: 0;
-  transform: translateY(6px);
+  position:absolute; left:14px; right:14px; bottom:14px;
+  padding:10px 12px; border-radius:999px;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(10px);
+  color: rgba(255,255,255,.95); font-size:.9rem; font-weight:800;
+  opacity: 0; transform: translateY(6px);
   transition: opacity .18s ease, transform .18s ease;
-  text-align: center;
-  pointer-events: none;
+  text-align:center; pointer-events:none;
 }
-.talent-card:hover .talent-label {
-  opacity: 1;
-  transform: translateY(0);
-}
+.talent-card:hover .talent-label { opacity:1; transform: translateY(0); }
+
+/* cursor affordance for dragging */
+.talent-vinyl { cursor: grab; -webkit-user-select: none; user-select: none; }
+.talent-vinyl.grabbing { cursor: grabbing; }
 
 /* =========================
-   FOOTER / CONTACT (stable across pages)
+   FOOTER / CONTACT
 ========================= */
-footer, .footer {
+.footer, footer {
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -576,167 +426,28 @@ footer, .footer {
   max-width: 1100px;
   width: min(1100px, 92vw);
   margin: 0 auto;
-  display: flex;
+  display:flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 40px;
   box-sizing: border-box;
   padding: 0 1rem;
 }
 
-.footer .contact-item,
-.footer .contact-left {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-start;
-}
+.contact-item { display:flex; flex-direction: column; gap: 8px; }
+.contact-label { font-size: 12px; font-weight: 600; color: var(--subtitle); }
+.contact-pill { display:inline-flex; align-items:center; padding:10px 16px; border-radius:999px; background:#fff; color:#000; text-decoration:none; font-size:14px; }
 
-.footer .contact-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--subtitle);
-}
+.instagram-contact { display:flex; flex-direction:column; gap:8px; align-items:flex-end; text-align:right; }
+.instagram-pill { display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; background:#fff; text-decoration:none; color:inherit; }
 
-.footer .contact-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: #fff;
-  color: #000;
-  font-size: 14px;
-  text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
+.instagram-icon { width:20px; height:20px; }
+.footer .contact-pill, .footer .instagram-pill { white-space: nowrap; }
 
-.footer .instagram-contact,
-.footer .contact-right {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: flex-end;
-  text-align: right;
-}
-
-.footer .instagram-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: #fff;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-.footer .instagram-icon { width: 20px; height: 20px; }
-
-.footer .contact-pill,
-.footer .instagram-pill { white-space: nowrap; }
-
-/* Responsive footer: stack on small screens */
-@media (max-width: 640px) {
-  .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .footer .instagram-contact,
-  .footer .contact-right {
-    align-items: flex-start;
-    text-align: left;
-  }
-}
-/* ===== TALENT: horizontal touch / smooth scrolling improvements ===== */
-
-/* Make sure the page doesn't allow accidental horizontal pan */
-html, body {
-  overscroll-behavior-x: none; /* avoid page-level horizontal bounce */
-}
-
-/* Scroller container: allow children to overflow horizontally but keep viewport visual */
-.talent-viewport {
-  position: relative;
-  overflow: visible;       /* we want controls/hint to show outside */
-  -webkit-overflow-scrolling: auto;
-  will-change: transform;
-}
-
-/* Inner scroller (the actual strip that scrolls) */
-.talent-vinyl {
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;            /* horizontal scroll */
-  overflow-y: hidden;          /* prevent vertical inside the scroller */
-  scroll-behavior: smooth;     /* smooth programmatic scroll */
-  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
-  scroll-snap-type: x proximity;/* optional snap UX */
-  overscroll-behavior-x: contain; /* keep overscroll inside scroller */
-  -ms-overflow-style: none;    /* hide IE scrollbar visuals */
-  scrollbar-width: none;       /* hide Firefox scrollbar */
-  touch-action: pan-x;         /* tell UA we intend horizontal panning */
-  padding: 14px 12px 18px;
-  border-radius: 22px;
-  box-sizing: border-box;
-}
-.talent-vinyl::-webkit-scrollbar { display: none; }
-
-/* Make each card an optional snap point (better feel on touch) */
-.talent-vinyl--5 .talent-card {
-  scroll-snap-align: center;
-}
-
-/* Visual hint: make the cards remain clipped inside the rounded shape */
-.talent-vinyl { border-radius: 22px; }
-
-/* Cursor affordance for desktops */
-.talent-vinyl.grabbing { cursor: grabbing; cursor: -webkit-grabbing; }
-.talent-vinyl { cursor: grab; cursor: -webkit-grab; }
-
-/* On very narrow phones keep single card width */
-@media (max-width: 480px) {
-  .talent-vinyl--5 .talent-card { width: 86vw; }
-}
 /* =========================
-   RESPONSIVE: mobile tweaks for talent scroller
+   UPDATES / WORK GRID
 ========================= */
-@media (max-width: 768px) {
-  /* mobile: one card at a time */
-  .talent-vinyl--5 .talent-card {
-    width: 86vw;
-    max-width: none;
-  }
-
-  /* keep arrows visible and smaller on mobile */
-  .talent-arrows {
-    right: 10px;
-    top: -10px;
-  }
-
-  .talent-hint {
-    left: 10px;
-    top: -16px;
-    font-size: .9rem;
-  }
-
-  /* reduce negative spacing so the card doesn't feel too low */
-  .talent-viewport {
-    margin-top: 0;
-  }
-}
-/* =========================
-   UPDATES PAGE (Instagram covers fix)
-========================= */
-.work-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
-}
+.work-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; }
 
 .work-card{
   border:1px solid rgba(255,255,255,.10);
@@ -746,92 +457,22 @@ html, body {
   box-shadow:0 22px 70px rgba(0,0,0,.55);
 }
 
-.work-thumb{
-  position:relative;
-  aspect-ratio:16 / 9;
-  overflow:hidden;
-  background:rgba(255,255,255,.02);
-}
+.work-thumb{ position:relative; aspect-ratio:16/9; overflow:hidden; background:rgba(255,255,255,0.02); }
+.work-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-.work-thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.badge{
-  position:absolute;
-  left:12px;
-  top:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  font-size:.78rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  font-weight:800;
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(10px);
-}
+.badge{ position:absolute; left:12px; top:12px; padding:7px 10px; border-radius:999px; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; font-weight:800; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(10px); }
 
 .work-body{ padding:14px 14px 16px; }
-
-.work-title{
-  margin:0 0 6px;
-  font-size:1rem;
-  letter-spacing:-.01em;
-}
-
-.work-meta{
-  margin:0 0 12px;
-  color:rgba(255,255,255,.65);
-  font-size:.9rem;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.work-actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.work-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.92);
-  color:#0b0b0b;
-  text-decoration:none;
-  font-weight:800;
-  font-size:.9rem;
-}
+.work-title{ margin:0 0 6px; font-size:1rem; letter-spacing:-.01em; }
+.work-meta{ margin:0 0 12px; color:rgba(255,255,255,.65); font-size:.9rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.work-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.work-btn{ display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.92); color:#0b0b0b; text-decoration:none; font-weight:800; font-size:.9rem; }
 .work-btn:hover{ opacity:.92; }
-
 .work-embed{ padding:14px 14px 0; }
-
-.work-embed .instagram-media{
-  margin:0 auto !important;
-  border-radius:18px !important;
-  overflow:hidden !important;
-  background:rgba(255,255,255,.03) !important;
-}
-.contact-row{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  margin-top: 48px;
-  flex-wrap: wrap;
-}
+.work-embed .instagram-media{ margin:0 auto !important; border-radius:18px !important; overflow:hidden !important; background:rgba(255,255,255,.03) !important; }
 
 /* =========================
-   MOVE TALENT + BRANDS UP
-   (requires <body class="talent-page"> / <body class="brands-page">)
+   MOVE TALENT + BRANDS UP helpers
 ========================= */
 .talent-page p.subtitle{ margin-bottom:1.2rem !important; }
 .talent-page .container{ padding-top:2.5rem !important; padding-bottom:2rem !important; }
@@ -841,308 +482,79 @@ html, body {
 .brands-page .container{ padding-top:2.5rem !important; padding-bottom:2rem !important; }
 .brands-page .brands-page{ margin-top:0 !important; }
 
-/* Fallback (only if browser supports :has) */
+/* fallback when :has is supported (keeps layout without editing HTML) */
 @supports selector(.x:has(.y)){
-  .container:has(.talent-viewport){
-    padding-top:2.5rem !important;
-    padding-bottom:2rem !important;
-  }
+  .container:has(.talent-viewport){ padding-top:2.5rem !important; padding-bottom:2rem !important; }
   .container:has(.talent-viewport) p.subtitle{ margin-bottom:1.2rem !important; }
 
-  .container:has(.brands-grid){
-    padding-top:2.5rem !important;
-    padding-bottom:2rem !important;
-  }
+  .container:has(.brands-grid){ padding-top:2.5rem !important; padding-bottom:2rem !important; }
   .container:has(.brands-grid) p.subtitle{ margin-bottom:1.2rem !important; }
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE RULES
 ========================= */
-@media (max-width:980px){
-  .work-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+
+/* medium screens */
+@media (max-width: 980px) {
+  .work-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .container { padding: 2.2rem 1rem; }
 }
 
-@media (max-width:768px){
-  .hero-overlay{
-    padding:1.25rem;
-    transform:translateY(-6%);
-  }
-  .hero-bubbles{ width:100%; }
-  .hero-bubble{ font-size:.92rem; }
-  .title-chip{ font-size:.88rem; padding:9px 14px; }
+/* tablet */
+@media (max-width: 820px) {
 
-  /* talent: 1 big card at a time */
-  .talent-viewport{ width:100%; }
-  .talent-vinyl--5 .talent-card{
-    width:86vw;
-    max-width:none;
-  }
+  /* nav + body spacing */
+  .top-nav { height: 56px; }
+  body { padding-top: 56px !important; }
+
+  .container { padding: 1rem 1rem 1.25rem; max-width: 100%; }
+  header { padding-top: 0.6rem; padding-bottom: 0.4rem; }
+  h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: .25rem; }
+  p.subtitle { margin-bottom: .6rem; max-width: 48ch; }
+
+  /* hero adjustments */
+  .hero { padding-top: .85rem; padding-bottom: 1.25rem; }
+  .hero-overlay { transform: none; padding: 1rem; align-items: flex-start; justify-content: center; }
+  .hero-bubbles { gap: 14px; width: 100%; }
+
+  /* talent: one big card at a time on smaller widths */
+  .talent-vinyl--5 .talent-card { width: 86vw !important; max-width: none !important; height: min(64vh, 520px) !important; aspect-ratio: auto !important; border-radius: 18px; }
+
+  /* bring talent and brands up a touch */
+  .brands-page .brands-grid, .talent-page .talent-viewport { margin-top: 0.25rem !important; }
+
+  /* footer stacking */
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 18px; padding-left: 1rem; padding-right: 1rem; }
+  .footer .instagram-contact, .footer .contact-right { align-items: flex-start; text-align: left; }
 }
 
-@media (max-width:620px){
-  .work-grid{ grid-template-columns:1fr; }
+/* phones */
+@media (max-width: 480px) {
+  .container { padding-left: .75rem !important; padding-right: .75rem !important; }
+  .talent-vinyl--5 .talent-card { width: 86vw !important; height: min(72vh, 520px) !important; }
+  /* optional: hide footer on tiny screens to avoid extra vertical scroll */
+  footer { display: none; }
 }
 
-@media (max-width:600px){
-  /* reel hero / video */
-  .reel-hero{
-    height:auto !important;
-    min-height:0 !important;
-    padding-top:64px !important;
-    background:var(--bg) !important;
-    overflow:hidden;
-  }
-  .reel-hero__media{
-    position:relative !important;
-    width:100% !important;
-    aspect-ratio:16 / 9;
-    background:var(--bg) !important;
-    overflow:hidden !important;
-  }
-  .reel-hero__media iframe{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    transform:none !important;
-    border:0 !important;
-    pointer-events:none;
-  }
-  .reel-hero iframe{ transform:none !important; }
-
-  /* hero */
-  .hero{ padding-top:.75rem !important; padding-bottom:1.25rem !important; }
-  .hero-photo{ border-radius:18px !important; }
-
-  .hero-overlay{
-    position:absolute !important;
-    inset:0 !important;
-    transform:none !important;
-    padding:14px !important;
-    display:flex !important;
-    align-items:stretch !important;
-    justify-content:center !important;
-  }
-
-  .hero-bubbles{
-    width:100% !important;
-    max-width:100% !important;
-    height:100% !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:space-between !important;
-    gap:0 !important;
-  }
-
-  .hero-bubble.title{
-    align-self:center !important;
-    margin-top:6px !important;
-    display:flex !important;
-    flex-wrap:wrap !important;
-    justify-content:center !important;
-    gap:8px !important;
-    white-space:normal !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-
-  .title-chip{
-    font-size:.72rem !important;
-    padding:8px 10px !important;
-    letter-spacing:.03em !important;
-  }
-
-  .hero-bubble:not(.title){
-    align-self:center !important;
-    width:92% !important;
-    max-width:92% !important;
-    padding:12px 14px !important;
-    font-size:.85rem !important;
-    line-height:1.35 !important;
-
-    margin-bottom:14px !important;
-    max-height:34% !important;
-    overflow:auto !important;
-    -webkit-overflow-scrolling:touch;
-
-    background:rgba(0,0,0,.48) !important;
-    border:1px solid rgba(255,255,255,.12) !important;
-    backdrop-filter:blur(10px) !important;
-
-    opacity:1 !important;
-    transform:none !important;
-  }
-
-  .hero-bubble .text{ margin-top:0 !important; }
-
-  /* reel hero content */
-  .reel-hero__content{ padding:14px !important; }
-  .reel-hero__card{
-    width:100% !important;
-    max-width:520px !important;
-    border-radius:18px !important;
-  }
-  .reel-hero__title{ font-size:1.9rem !important; }
-  .reel-hero__actions{
-    gap:10px !important;
-    flex-wrap:wrap !important;
-  }
-}
-/* ===== Fix Talent Controls Placement ===== */
-
-/* Make sure controls are NOT clipped inside viewport */
-.talent-head{
-  position: relative;
-  z-index: 5;
+/* reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 
-/* Ensure arrows are not inside the masked container */
-.talent-arrows{
-  position: relative;
-  z-index: 6;
-}
+/* =========================
+   Accessibility / small tweaks
+========================= */
+/* make interactive elements clearly focusable */
+button, a[role="button"], .brand-item { outline: none; }
+button:focus, a:focus, .brand-item:focus { box-shadow: 0 0 0 4px rgba(255,134,0,0.14); outline: none; border-radius: 8px; }
 
-/* Prevent footer from overlapping content */
-.footer{
-  position: relative;
-  z-index: 1;
-}
+/* helpers to ensure hero copy is readable */
+.hero-bubble, .hero-bubble * { color: inherit; }
 
-/* Remove any accidental absolute positioning from hint text */
-.talent-hint{
-  position: static;
-}
-/* ===============================
+/* ensure text blocks inside info cards are visible on mobile */
+.info-card, .work-card, .talent-viewport { -webkit-font-smoothing:antialiased; }
 
-@media (max-width: 600px) {
-  .talent-vinyl {
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-/* ======================================================
-   CLEAN MOBILE LAYER (ONLY MOBILE RULES)
-   Single responsive system — no conflicts
-====================================================== */
-
-@media (max-width: 768px){
-
-  /* ---------- Layout spacing ---------- */
-
-  .container{
-    padding: 1.5rem 1.2rem 2rem;
-  }
-
-  header{
-    padding-top: 1rem;
-  }
-
-  h1{
-    font-size: 2rem;
-  }
-
-  /* ---------- Hero fixes ---------- */
-
-  .hero{
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-  }
-
-  /* Remove desktop vertical shift */
-  .hero-overlay{
-    transform: none;
-    padding: 1rem;
-    align-items: flex-start;
-  }
-
-  /* Ensure hero text is always visible */
-  .hero-bubble{
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero-bubble.title{
-    flex-wrap: wrap;
-    white-space: normal;
-    justify-content: center;
-  }
-
-  .title-chip{
-    font-size: .75rem;
-    padding: 8px 10px;
-  }
-
-  /* ---------- Reel layout stacks ---------- */
-
-  .reel-layout{
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  /* ---------- Talent section ---------- */
-
-  .talent-viewport{
-    margin-top: 0;
-  }
-
-  .talent-vinyl--5 .talent-card{
-    width: 86vw;
-    max-width: none;
-  }
-
-  /* ---------- Brands grid ---------- */
-
-  .brands-grid{
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* ---------- Work grid ---------- */
-
-  .work-grid{
-    grid-template-columns: 1fr;
-  }
-/* ===== TALENT: keep scroller clipped, make arrows/hint visible ===== */
-.talent-viewport {
-  position: relative;         /* establish stacking context for arrows */
-  overflow: visible !important; /* allow arrows/hint to render outside the rounded box */
-  z-index: 1;
-}
-
-/* Move the clipping to the inner scroller so images still stay inside the rounded card */
-.talent-vinyl {
-  border-radius: 22px;       /* same radius as the viewport */
-  overflow: hidden;          /* clip the images inside the rounded rect */
-  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
-  padding: 14px 2px 16px;    /* keep your original spacing */
-}
-
-/* Position the arrows above the rounded box (top-right) so they're never clipped */
-.talent-arrows,
-.talent-nav {
-  position: absolute !important;
-  top: -12px !important;     /* nudge above the box */
-  right: 12px !important;
-  z-index: 9999 !important;
-  display: flex !important;
-  gap: 10px !important;
-  pointer-events: auto !important;
-}
-
-/* Ensure the small hint text is not inside the scroll mask and remains readable */
-.talent-hint {
-  position: absolute !important;
-  left: 12px !important;
-  top: -18px !important;
-  color: rgba(255,255,255,0.85);
-  font-size: .85rem;
-  z-index: 9998 !important;
-  pointer-events: none;
-}
-
-/* Slight visual tweak so inner scroller looks identical to previous 'card' */
-.talent-vinyl--5 .talent-card{
-  /* preserve existing card sizing; this rule won't change widths */
-  box-shadow: none; /* inner cards shouldn't double-shadow with outer mask */
-}
-}
+/* =========================
+   End of stylesheet
+========================= */
