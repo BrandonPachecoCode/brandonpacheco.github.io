@@ -261,31 +261,76 @@
   </div>
 </main>
 
-<!-- Video Modal -->
-<div id="video-modal" class="video-modal" aria-hidden="true">
-  <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video player">
-    <button class="video-close" aria-label="Close video" type="button">×</button>
-    <div class="video-frame"></div>
-  </div>
-</div>
+<script>
+(function(){
+  // Elements from your markup
+  const modal = document.getElementById("video-modal");
+  const modalContent = modal ? modal.querySelector(".video-modal-content") : null;
+  const frame = modal ? modal.querySelector(".video-frame") : null;
+  const closeBtn = modal ? modal.querySelector(".video-close") : null;
 
-  <script>
+  if (!modal || !modalContent || !frame || !closeBtn) {
+    console.warn("Video modal markup missing one or more nodes: modal, modalContent, frame, closeBtn");
+    return;
+  }
+
+  // Helpers to convert URLs to embed URLs (YouTube / Vimeo)
+  function toYouTubeEmbed(url) {
+    try {
+      const u = new URL(url, location.href);
+      if (u.hostname.includes("youtu.be")) {
+        const id = u.pathname.slice(1);
+        return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      }
+      if (u.hostname.includes("youtube.com")) {
+        const v = u.searchParams.get("v");
+        if (v) return `https://www.youtube.com/embed/${v}?autoplay=1&rel=0`;
+        // handle /embed/ or /shorts/
+        const pathParts = u.pathname.split("/").filter(Boolean);
+        const maybe = pathParts.pop();
+        if (maybe) return `https://www.youtube.com/embed/${maybe}?autoplay=1&rel=0`;
+      }
+    } catch(e){ /* ignore */ }
+    return null;
+  }
+
+  function toVimeoEmbed(url) {
+    try {
+      const u = new URL(url, location.href);
+      if (u.hostname.includes("vimeo.com")) {
+        const parts = u.pathname.split("/").filter(Boolean);
+        const id = parts.pop();
+        if (id && !isNaN(Number(id))) return `https://player.vimeo.com/video/${id}?autoplay=1`;
+      }
+    } catch(e){ /* ignore */ }
+    return null;
+  }
+
+  // open/close
   function openModal(embedUrl, orientation) {
+    // orientation optional: landscape/portrait class on modalContent
     modalContent.classList.toggle("landscape", orientation === "landscape");
 
-    frame.innerHTML = `
-      <iframe
-        src="${embedUrl}"
-        title="Video"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-      ></iframe>
-    `;
+    // ensure an iframe only for embed urls
+    if (!embedUrl) return console.warn("openModal called without embedUrl");
+    frame.innerHTML = ""; // clean
+    const iframe = document.createElement("iframe");
+    iframe.src = embedUrl;
+    iframe.title = "Video";
+    iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen; picture-in-picture");
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.loading = "lazy";
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    frame.appendChild(iframe);
 
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
+
+    // move focus into modal for accessibility
+    closeBtn.focus();
   }
 
   function closeModal() {
@@ -293,68 +338,62 @@
     modal.setAttribute("aria-hidden", "true");
     frame.innerHTML = "";
     modalContent.classList.remove("landscape");
+    document.documentElement.style.overflow = "";
     document.body.style.overflow = "";
   }
 
-  document.querySelectorAll(".brand-link").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-
-      const url = link.dataset.video;
-      if (!url) return;
-
-      const isYouTube = url.includes("youtube.com") || url.includes("youtu.be");
-      const isIG = url.includes("instagram.com");
-
-      const orientation =
-        (link.dataset.orientation === "landscape" || link.dataset.orientation === "portrait")
-          ? link.dataset.orientation
-          : (isYouTube ? "landscape" : "portrait");
-
-      let embedUrl = url;
-      if (isYouTube) embedUrl = toYouTubeEmbed(url);
-      if (isIG) embedUrl = toInstagramEmbed(url);
-
-      openModal(embedUrl, orientation);
-    });
-  });
-
   closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+  modal.addEventListener("click", (e) => { if (e.target === modal || e.target === modal.querySelector(".video-modal-content")) closeModal(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  // Delegated click handler: open modal for elements with data-video or .brand-link
+  document.addEventListener("click", function(ev){
+    // find element with data-video or class brand-link
+    const clicked = ev.target.closest && (ev.target.closest("[data-video]") || ev.target.closest(".brand-link"));
+    if (!clicked) return;
+
+    // If it's an <a> with modifiers, let browser handle (open in new tab)
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+
+    // Prevent default navigation
+    ev.preventDefault();
+
+    // Prefer dataset video attribute
+    const url = clicked.dataset && (clicked.dataset.video || clicked.getAttribute("href") || clicked.dataset.url || clicked.dataset.link);
+    if (!url) {
+      console.warn("Clicked brand has no data-video/href/data-url: ", clicked);
+      return;
+    }
+
+    // Try YouTube -> Vimeo -> fallback open in new tab
+    const youEmbed = toYouTubeEmbed(url);
+    if (youEmbed) { openModal(youEmbed, "landscape"); return; }
+
+    const vEmbed = toVimeoEmbed(url);
+    if (vEmbed) { openModal(vEmbed, "landscape"); return; }
+
+    // Instagram / other hosts often don't allow simple iframe embedding; fall back to opening in new tab
+    // If you specifically want Instagram embed inside the site you'll need to use oEmbed or Instagram's embed JS.
+    if (url.includes("instagram.com")) {
+      // Optional: try instagram oembed path (not reliable cross-origin) — fallback: open new tab
+      window.open(url, "_blank", "noopener");
+      return;
+    }
+
+    // Any other absolute URL — open in new tab (safe fallback)
+    if (/^https?:\/\//i.test(url)) {
+      window.open(url, "_blank", "noopener");
+      return;
+    }
+
+    // Relative link -> navigate
+    window.location.href = url;
+  }, true);
+
+  // Optional: expose debugging helper
+  window.__videoModalDebug = () => {
+    console.log("modal present:", !!modal, "frame element:", frame, "closeBtn:", closeBtn);
+  };
+
+})();
 </script>
-
-  <footer class="footer">
-
-  <div class="footer-inner">
-
-    <div class="contact-item">
-      <span class="contact-label">Contact</span>
-      <a class="contact-pill" href="mailto:brandonchopas@icloud.com">
-        brandonchopas@icloud.com
-      </a>
-    </div>
-
-    <a
-      class="instagram-contact"
-      href="https://www.instagram.com/brandonpachecoh/"
-      target="_blank"
-      rel="noopener"
-    >
-      <span class="contact-label">Behind the scenes</span>
-
-      <div class="instagram-pill">
-        <img
-          src="logos/instagram-logo.png"
-          alt="Instagram"
-          class="instagram-icon"
-        />
-        <span class="instagram-text">@brandonpachecoh</span>
-      </div>
-    </a>
-
-  </div>
-
-</footer>
-</body>
-</html>
