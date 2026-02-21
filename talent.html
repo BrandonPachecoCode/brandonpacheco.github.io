@@ -250,30 +250,6 @@
 </footer>
   
 <script>
-  // ---- Modal ----
-  const tModal = document.getElementById("talent-modal");
-  const tImg = document.getElementById("talent-modal-img");
-  const tName = document.getElementById("talent-modal-name");
-  const tClose = document.querySelector(".talent-close");
-
-  function openTalent({ name, img }) {
-    tName.textContent = name || "";
-    tImg.src = img || "";
-    tImg.alt = name || "Talent";
-    tModal.classList.add("active");
-    tModal.setAttribute("aria-hidden", "false");
-  }
-
-  function closeTalent() {
-    tModal.classList.remove("active");
-    tModal.setAttribute("aria-hidden", "true");
-    tImg.src = "";
-  }
-
-  document.querySelectorAll(".talent-card").forEach(card => {
-    card.addEventListener("click", () => {
-      openTalent({ name: card.dataset.name, img: card.dataset.img });
-    });
   });
 
   tClose.addEventListener("click", closeTalent);
