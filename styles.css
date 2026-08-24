@@ -1300,16 +1300,20 @@ a:focus-visible,
   }
 
   /* BIO */
-  .hero-bubble.bio {
-    width: 82% !important;
-    max-width: 82% !important;
-    padding: 10px 12px !important;
-    border-radius: 15px !important;
-  }
+.hero-bubble.bio {
+  width: 100% !important;
+  max-width: 100% !important;
 
-  .bio-text {
-    font-size: 0.66rem !important;
-    line-height: 1.36 !important;
-    text-align: center;
-  }
+  padding: 14px 18px !important;
+  border-radius: 18px !important;
+
+  box-sizing: border-box;
+}
+
+.bio-text {
+  font-size: 0.78rem !important;
+  line-height: 1.42 !important;
+  text-align: center;
+
+  margin: 0 !important;
 }
