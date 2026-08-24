@@ -1095,3 +1095,109 @@ a:focus-visible,
     scroll-behavior: auto !important;
   }
 }
+/* =========================
+   SHOWREEL BIO SECTION
+========================= */
+
+.hero {
+  width: min(1100px, 92vw);
+  margin: 2.5rem auto 3rem;
+}
+
+.hero-photo {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--window);
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Roles - ONE LINE */
+.hero-roles {
+  width: 100%;
+  margin-top: 1.4rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero-roles::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-roles__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: max-content;
+  min-width: 100%;
+  white-space: nowrap;
+}
+
+.hero-roles__track span {
+  flex: 0 0 auto;
+  padding: 0.8rem 1.15rem;
+  border-radius: 999px;
+  background: var(--window);
+  border: 1px solid var(--stroke);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* Bio underneath */
+.hero-bio {
+  width: min(760px, 100%);
+  margin: 1.5rem auto 0;
+  text-align: center;
+}
+
+.hero-bio p {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero {
+    width: calc(100% - 2rem);
+    margin-top: 2rem;
+  }
+
+  .hero-roles {
+    margin-top: 1rem;
+  }
+
+  .hero-roles__track {
+    justify-content: flex-start;
+    gap: 0.65rem;
+    min-width: max-content;
+  }
+
+  .hero-roles__track span {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.72rem;
+  }
+
+  .hero-bio {
+    margin-top: 1.25rem;
+    text-align: left;
+  }
+
+  .hero-bio p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+}
