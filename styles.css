@@ -1,70 +1,116 @@
-/* =========================
-   BRANDONPACHECO.COM — COMPLETE CSS
-   - Single-file stylesheet: desktop + responsive mobile
-   - Animations removed where they hid content
-   - Talent scroller fixed (horizontal touch, snapping, controls outside mask)
-   - Brands click/hover styles preserved
-   - Mobile spacing reduced so page sits under fixed nav
-========================= */
+/* =========================================================
+   BRANDONPACHECO.COM
+   ========================================================= */
 
-/* =========================
-   GLOBAL / BASE
-========================= */
-* { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-:root{
-  --bg: #CCDAD1;        /* full website background */
-  --window: #E0E6E2;    /* “windows” / cards */
-  --accent: #FF8600;    /* details / wraps / menu */
-  --subtitle: #FF8500;  /* subtitles ONLY */
+:root {
+  --bg: #CCDAD1;
+  --window: #E0E6E2;
+  --accent: #FF8600;
+  --subtitle: #FF8500;
   --text: #0b0b0b;
   --text-muted: rgba(11,11,11,.65);
   --stroke: rgba(11,11,11,.10);
   --shadow: 0 24px 70px rgba(0,0,0,.18);
+  --section-gap: 2.2rem;
 }
 
-html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
-
-/* keep page from accidental horizontal pan */
-html, body { overflow-x: hidden; overscroll-behavior-x: none; }
-
-body{
-  margin: 0;
+html,
+body {
+  width: 100%;
   min-height: 100%;
-  padding-top: 64px; /* space for fixed nav */
-  background: var(--bg);
-  color: var(--text); /* default text black */
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-               Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
-/* =========================
-   TYPO / GLOBAL RULES
-========================= */
-h1, h2, h3, .title, .work-title { color: var(--text); margin: 0; }
+body {
+  padding-top: 64px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-tap-highlight-color: transparent;
+}
 
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+.title,
+.work-title {
+  color: var(--text);
+}
+
+h1 {
+  margin: 0 0 .6rem;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  letter-spacing: -.01em;
+}
+
+/* ALL page subtitles = orange */
 .subtitle,
 header p.subtitle,
 header > p,
 h1 + p,
-h2 + p {
+h2 + p,
+.updates-hero p {
   color: var(--subtitle) !important;
   opacity: 1 !important;
 }
 
-/* small helpers */
-.container { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; box-sizing: border-box; }
-.hidden { display: none !important; }
+p.subtitle {
+  max-width: 58ch;
+  margin: 0 auto var(--section-gap);
+  font-size: 1.05rem;
+}
 
-/* =========================
-   TOP NAV
-========================= */
-.top-nav{
+header {
+  padding-top: 2.5rem !important;
+  padding-bottom: 0 !important;
+  text-align: center;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 2rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.top-nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 64px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1100;
+
+  height: 64px;
 
   display: flex;
   align-items: center;
@@ -74,132 +120,199 @@ h2 + p {
   background: rgba(224,230,226,.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--stroke);
-  box-sizing: border-box;
 }
 
-.nav-link{
-  text-decoration: none;
-  font-weight: 800;
-  color: rgba(11,11,11,.70);
+.nav-link {
   padding: 10px 14px;
   border-radius: 999px;
-  transition: background .18s ease, color .18s ease, transform .18s ease;
+
+  color: rgba(11,11,11,.70);
+  text-decoration: none;
+  font-weight: 800;
+
+  transition:
+    background .18s ease,
+    color .18s ease,
+    transform .18s ease;
 }
 
-.nav-link:hover{ background: rgba(255,255,255,.55); transform: translateY(-1px); }
-.nav-link.active{ background: var(--accent); color: #fff; }
-
-/* Optional: orange “detail wrap” */
-.detail-wrap{ border: 1px solid rgba(255,134,0,.45); box-shadow: 0 18px 60px rgba(255,134,0,.12); }
-
-/* =========================
-   LAYOUT / TYPO
-========================= */
-header { text-align: center; padding-top: 6rem; }
-
-h1 {
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  line-height: 1.05;
-  margin: 0 0 0.6rem;
-  letter-spacing: -0.03em;
+.nav-link:hover {
+  background: rgba(255,255,255,.55);
+  transform: translateY(-1px);
 }
 
-p.subtitle {
-  margin: 0 auto 2.4rem;
-  max-width: 58ch;
-  font-size: 1.05rem;
+.nav-link.active {
+  background: var(--accent);
+  color: #fff;
 }
 
-h2 { margin: 0 0 1rem; font-size: 1.25rem; letter-spacing: -0.01em; }
+.detail-wrap {
+  border: 1px solid rgba(255,134,0,.45);
+  box-shadow: 0 18px 60px rgba(255,134,0,.12);
+}
 
-/* =========================
+
+/* =========================================================
    BUTTONS
-========================= */
+   ========================================================= */
+
 .button {
   display: inline-block;
   margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  background: #ffffff;
-  color: #000000;
-  text-decoration: none;
+  padding: .75rem 1.5rem;
+
   border-radius: 999px;
+  background: #fff;
+  color: #000;
+
+  text-decoration: none;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: .01em;
 }
-.button:hover { opacity: 0.9; }
 
-/* =========================
-   REEL LAYOUT
-========================= */
-.reel-layout{ display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
-.reel-video{ display:flex; justify-content:flex-start; }
+.button:hover {
+  opacity: .9;
+}
 
-.video-portrait{ position: relative; width: 320px; aspect-ratio: 9/16; border-radius: 20px; overflow: hidden; background: #000; }
-.video-portrait iframe{ width:100%; height:100%; border:none; }
 
-.reel-text{ display:flex; flex-direction:column; gap: .35rem; }
-.reel-text p{ font-size: 1.6rem; font-weight:600; letter-spacing:.04em; color:#fff; line-height:1.15; margin:0; }
+/* =========================================================
+   SHOWREEL
+   ========================================================= */
 
-/* =========================
-   HERO (IMAGE + CHAT BUBBLES)
-   — animations removed so text is readable by default
-========================= */
-.hero { padding-top: 1.25rem; padding-bottom: 2.25rem; }
+.reel-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.reel-video {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.video-portrait {
+  position: relative;
+  width: 320px;
+  aspect-ratio: 9 / 16;
+
+  overflow: hidden;
+  border-radius: 20px;
+  background: #000;
+}
+
+.video-portrait iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.reel-text {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.reel-text p {
+  margin: 0;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: .04em;
+}
+
+
+/* =========================================================
+   HERO / PROFILE
+   ========================================================= */
+
+.hero {
+  padding: 1.25rem 0 2.25rem;
+}
 
 .hero-photo {
   position: relative;
+
   width: min(100%, 1100px);
   margin: 0 auto;
-  border-radius: 24px;
+
   overflow: hidden;
-  background: rgba(255,255,255,0.02);
+  border-radius: 24px;
+  background: rgba(255,255,255,.02);
 }
 
-.hero-photo img { width:100%; height:auto; display:block; filter:none !important; opacity:1 !important; mix-blend-mode:normal !important; }
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
 
 .hero-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: clamp(1.6rem, 4vw, 3rem);
-  z-index: 2;
-  pointer-events: none;
   transform: translateY(15%);
+  pointer-events: none;
 }
 
-.hero-bubbles { display:flex; flex-direction:column; gap:22px; width:min(720px,100%); }
+.hero-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 
-/* title chip (always visible) */
-.title-chip{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:12px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.95);
-  color:#0b0b0b;
-  font-weight:900;
-  font-size:1rem;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.06);
+  width: min(720px, 100%);
 }
 
-/* base bubble — visible by default (no opacity=0 states) */
+.title-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.95);
+  color: var(--text);
+
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(0,0,0,.06);
+}
+
 .hero-bubble {
   position: relative;
+
   max-width: 92%;
   padding: 14px 18px;
+
   border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.12);
+
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(12px);
+
+  color: var(--subtitle);
+
   font-size: .95rem;
   line-height: 1.55;
 
-  color: var(--subtitle);
-  background: rgba(0,0,0,.55);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,.12);
   box-shadow: 0 18px 60px rgba(0,0,0,.55);
 
   opacity: 1 !important;
@@ -208,513 +321,789 @@ h2 { margin: 0 0 1rem; font-size: 1.25rem; letter-spacing: -0.01em; }
   transition: none !important;
 }
 
-/* typing style (kept but won't hide content) */
-.hero-bubble.is-typing::after{
+.hero-bubble,
+.hero-bubble * {
+  color: inherit;
+}
+
+.hero-bubble.is-typing::after {
   content: "";
+
   position: absolute;
-  left: 18px;
   top: 18px;
-  width: 6px; height: 6px; border-radius: 999px;
-  background: rgba(255,255,255,0.85);
-  box-shadow: 10px 0 0 rgba(255,255,255,0.55), 20px 0 0 rgba(255,255,255,0.35);
-}
-/* === Balanced spacing around Talent section ===
-   Ensures header -> talent and talent -> hint distances are the same.
-   Put this at the end of your styles.css or in the page <style> so it overrides earlier rules.
-*/
-:root{
-  --section-gap: 2.2rem; /* tweak this once to change both gaps */
+  left: 18px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 999px;
+  background: rgba(255,255,255,.85);
+
+  box-shadow:
+    10px 0 0 rgba(255,255,255,.55),
+    20px 0 0 rgba(255,255,255,.35);
 }
 
-/* Reduce the huge top padding coming from .container/header on this page and keep consistent rhythm */
-header {
-  /* keep some top padding but smaller than original so title sits higher */
-  padding-top: 2.5rem !important;
-  padding-bottom: 0 !important;
-}
 
-/* Make subtitle -> next section use our section gap */
-header p.subtitle,
-.container > header p.subtitle {
-  margin-bottom: var(--section-gap) !important;
-}
+/* =========================================================
+   INFO CARDS
+   ========================================================= */
 
-/* Place the hint (talent-head) so it sits the same distance below the carousel as the carousel sits below the header.
-   We set a top offset on the viewport, and keep the talent-head above the viewport. */
-.talent-viewport {
-  /* remove negative offsets that were pushing the viewport out of rhythm */
-  margin-top: 0 !important;
+.info-page {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: -1.25rem;
 }
-
-/* Move the talent-head (hint + arrows) so it sits exactly one section-gap above the viewport.
-   Because talent-head is visually *above* the viewport in your markup, we give it margin-bottom to control spacing
-   between it and the carousel. */
-.talent-head {
-  margin-top: 0 !important;        /* don't stack extra above the head */
-  margin-bottom: calc(var(--section-gap) * 0.5) !important; /* smaller space under head for visual balance */
-}
-
-/* Now create a matching gap between the header & the carousel by adding top padding to the wrapper that contains the viewport.
-   This keeps the space above the carousel equal to the subtitle bottom space plus half the head spacing so visually it's balanced. */
-.info-page .talent-card-block,
-.talent-page .container .talent-viewport,
-.talent-viewport {
-  padding-top: calc(var(--section-gap) * 0.5) !important;
-}
-
-/* If you prefer exact equal spacing header -> carousel and carousel -> hint,
-   set both to var(--section-gap) by uncommenting these two lines and comment the rules above */
-/*
-header p.subtitle { margin-bottom: var(--section-gap) !important; }
-.talent-head { margin-bottom: var(--section-gap) !important; }
-.talent-viewport { margin-top: var(--section-gap) !important; }
-*/
-
-/* Tiny responsive tweak so things don't become cramped on mobile */
-@media (max-width: 768px){
-  :root{ --section-gap: 1.3rem; }
-  header { padding-top: 1.25rem !important; }
-  header p.subtitle { margin-bottom: var(--section-gap) !important; }
-  .talent-head { margin-bottom: calc(var(--section-gap) * 0.6) !important; }
-  .info-page .talent-card-block,
-  .talent-viewport { padding-top: calc(var(--section-gap) * 0.5) !important; }
-}
-/* =========================
-   INFO PAGE CARDS
-========================= */
-.info-page { display: grid; gap: 1.25rem; margin-top: -1.25rem; }
 
 .info-card {
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
-  border-radius: 18px;
   padding: 1.25rem;
+
+  border: 1px solid var(--stroke);
+  border-radius: 18px;
+  background: var(--window);
 }
 
-.info-card ul { margin: .5rem 0 0; padding-left: 1.2rem; color: rgba(245,245,245,.78); }
+.info-card ul {
+  margin: .5rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+}
 
-/* =========================
-   BRANDS PAGE
-========================= */
-.brands-page { display:flex; justify-content:center; position:relative; margin-top:.5rem; border-top:1px solid rgba(255,255,255,.06); padding-top:2.5rem; }
+
+/* =========================================================
+   BRANDS
+   ========================================================= */
+
+.brands-page {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  margin-top: 0;
+  padding-top: 2.5rem;
+
+  border-top: 1px solid var(--stroke);
+}
 
 .brands-grid {
-  width:100%;
-  max-width:1250px;
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  width: 100%;
+  max-width: 1250px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2.6rem 2.2rem;
-  align-items:center;
+  align-items: center;
 }
 
 .brand-item {
   position: relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
-  outline: none;
 }
 
 .brand-item img {
-  max-width:300px;
-  max-height:160px;
-  width:100%;
-  height:auto;
-  object-fit:contain;
-  margin:0 auto;
-  background: rgba(255,255,255,.10);
-  padding:34px 40px;
-  border-radius:26px;
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 24px 70px rgba(0,0,0,.60), inset 0 0 0 1px rgba(255,255,255,.06);
-  transition: transform .25s ease, background .25s ease, box-shadow .25s ease, opacity .2s ease;
+  width: 100%;
+  max-width: 300px;
+  max-height: 160px;
+  height: auto;
+
+  margin: 0 auto;
+  padding: 34px 40px;
+
+  object-fit: contain;
+
+  background: var(--window);
+  border: 1px solid var(--stroke);
+  border-radius: 26px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    box-shadow .25s ease,
+    opacity .2s ease;
 }
 
-.brand-item:hover img { transform: translateY(-6px) scale(1.02); background: rgba(255,255,255,.14); }
+.brand-item:hover img {
+  transform: translateY(-6px) scale(1.02);
+  opacity: .25;
+}
 
 .brand-name {
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  font-size:.85rem;
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  color:var(--subtitle);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .2s ease;
-  text-align:center;
-  width:90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 90%;
+  transform: translate(-50%, -50%);
+
+  color: var(--subtitle);
+
+  font-size: .85rem;
+  letter-spacing: .10em;
+  text-align: center;
+  text-transform: uppercase;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .2s ease;
 }
 
-.brand-item:hover .brand-name { opacity: 1; }
-.brand-item:hover img { opacity: .25; }
+.brand-item:hover .brand-name {
+  opacity: 1;
+}
 
-/* =========================
-   TALENT — scroller / cards
-   - Controls sit outside rounded mask
-   - Inner scroller clips images
-========================= */
 
-/* Head line: contains hint text and arrows - sibling to viewport */
+/* =========================================================
+   TALENT
+   ========================================================= */
+
 .talent-head {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:.75rem;
   position: relative;
   z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin: 0 0 var(--section-gap);
 }
 
-/* hint placed above the card so it won't be clipped */
 .talent-hint {
-  margin: 0;
-  color: rgba(11,11,11,0.65);
-  font-size: .95rem;
   position: absolute;
-  left: 12px;
   top: -18px;
-  pointer-events: none;
+  left: 12px;
   z-index: 7;
+
+  margin: 0;
+
+  color: var(--text-muted);
+  font-size: .95rem;
+
+  pointer-events: none;
 }
 
-/* arrows container outside the rounded area */
 .talent-arrows {
-  display:flex;
-  gap:10px;
   position: absolute;
-  right: 12px;
   top: -12px;
+  right: 12px;
   z-index: 8;
-  pointer-events: auto;
+
+  display: flex;
+  gap: 10px;
 }
 
-/* arrow look */
 .talent-nav {
-  height:40px; width:40px; border-radius:999px;
-  border:1px solid rgba(255,255,255,.14);
-  background: rgba(0,0,0,.28);
-  color: rgba(255,255,255,.95);
-  font-size:22px; cursor:pointer;
-  display:inline-flex; align-items:center; justify-content:center;
-}
-.talent-nav:hover { background: rgba(255,255,255,.08); }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-/* viewport: visual card (controls outside) */
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+
+  background: var(--window);
+  color: var(--text);
+
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.talent-nav:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
 .talent-viewport {
+  position: relative;
+  z-index: 2;
+
   width: min(100%, 1240px);
   margin: 0 auto;
+  padding-top: calc(var(--section-gap) * .2) !important;
+
+  overflow: visible;
   border-radius: 22px;
-  margin-top: -2.5rem;
-  position: relative;
-  overflow: visible; /* allow controls/hint to show above */
-  z-index: 2;
-  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
 }
 
-/* inner vinyl: the real scroller, clipped and rounded */
 .talent-vinyl {
-  display:flex;
-  gap:18px;
+  display: flex;
+  gap: 18px;
+
+  padding: 14px 12px 16px;
+
   overflow-x: auto;
   overflow-y: hidden;
+
+  border-radius: 22px;
+
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   scroll-snap-type: x proximity;
   overscroll-behavior-x: contain;
+
   scrollbar-width: none;
   -ms-overflow-style: none;
-  touch-action: pan-x;
-  padding: 14px 12px 16px;
-  border-radius: 22px;
-  box-shadow: 0 22px 70px rgba(0,0,0,.55);
-}
-.talent-vinyl::-webkit-scrollbar { display: none; }
 
-/* 3 per view desktop */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+
+  cursor: grab;
+  user-select: none;
+
+  box-shadow: var(--shadow);
+}
+
+.talent-vinyl::-webkit-scrollbar {
+  display: none;
+}
+
+.talent-vinyl.grabbing {
+  cursor: grabbing;
+}
+
 .talent-vinyl--5 .talent-card {
+  position: relative;
+
   flex: 0 0 auto;
-  width: calc((100% - (18px * 2)) / 3);
+  width: calc((100% - 36px) / 3);
   max-width: 400px;
   aspect-ratio: 2 / 3;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.06);
-  box-shadow: none;
-  position: relative;
+
   padding: 0;
+
+  overflow: hidden;
+
+  border: 1px solid var(--stroke);
+  border-radius: 22px;
+
+  background: var(--window);
+
   cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
 }
-.talent-vinyl--5 .talent-card img { width:100%; height:100%; object-fit:cover; display:block; }
-.talent-vinyl--5 .talent-card:hover { transform: translateY(-10px); background: rgba(255,255,255,.09); box-shadow: 0 34px 110px rgba(0,0,0,.72); }
 
-/* hover label */
-.talent-label {
-  position:absolute; left:14px; right:14px; bottom:14px;
-  padding:10px 12px; border-radius:999px;
-  background: rgba(0,0,0,.45); backdrop-filter: blur(10px);
-  color: rgba(255,255,255,.95); font-size:.9rem; font-weight:800;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity .18s ease, transform .18s ease;
-  text-align:center; pointer-events:none;
-}
-.talent-card:hover .talent-label { opacity:1; transform: translateY(0); }
-
-/* cursor affordance for dragging */
-.talent-vinyl { cursor: grab; -webkit-user-select: none; user-select: none; }
-.talent-vinyl.grabbing { cursor: grabbing; }
-
-/* =========================
-   FOOTER / CONTACT
-========================= */
-.footer, footer {
+.talent-vinyl--5 .talent-card img {
+  display: block;
   width: 100%;
-  box-sizing: border-box;
+  height: 100%;
+  object-fit: cover;
+}
+
+.talent-vinyl--5 .talent-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 34px 90px rgba(0,0,0,.20);
+}
+
+.talent-label {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+
+  padding: 10px 12px;
+
+  border-radius: 999px;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(10px);
+
+  color: #fff;
+
+  font-size: .9rem;
+  font-weight: 800;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+
+  transition:
+    opacity .18s ease,
+    transform .18s ease;
+}
+
+.talent-card:hover .talent-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   LATEST WORK
+   ========================================================= */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.work-card {
+  overflow: hidden;
+
+  background: var(--window);
+  border: 1px solid var(--stroke);
+  border-radius: 22px;
+
+  box-shadow: var(--shadow);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+.work-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+  background: rgba(255,255,255,.2);
+}
+
+.work-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  padding: 7px 10px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.20);
+
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(10px);
+
+  color: #fff;
+
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.work-body {
+  padding: 14px 14px 16px;
+}
+
+.work-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  letter-spacing: -.01em;
+}
+
+.work-meta {
+  margin: 0 0 12px;
+
+  overflow: hidden;
+
+  color: var(--text-muted);
+  font-size: .9rem;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.work-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.work-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  border-radius: 999px;
+
+  background: var(--accent);
+  color: #fff;
+
+  text-decoration: none;
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.work-btn:hover {
+  opacity: .9;
+}
+
+.work-embed {
+  padding: 14px 14px 0;
+}
+
+.work-embed .instagram-media {
+  margin: 0 auto !important;
+
+  overflow: hidden !important;
+
+  border-radius: 18px !important;
+  background: var(--window) !important;
+}
+
+
+/* =========================================================
+   LATEST FILTERS / SEARCH
+   ========================================================= */
+
+.updates-controls .pill {
+  color: var(--text);
+}
+
+.updates-controls .pill.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+#searchInput {
+  background: var(--window);
+  color: var(--text);
+  border: 1px solid var(--stroke);
+}
+
+#searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer,
+footer {
   position: relative;
   z-index: 1;
-  padding: 32px 0 48px;
-  background: transparent;
+
   clear: both;
+
+  width: 100%;
+  padding: 32px 0 48px;
+
+  background: transparent;
 }
 
 .footer-inner {
-  max-width: 1100px;
   width: min(1100px, 92vw);
+  max-width: 1100px;
+
   margin: 0 auto;
-  display:flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  box-sizing: border-box;
   padding: 0 1rem;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
 }
 
-.contact-item { display:flex; flex-direction: column; gap: 8px; }
-.contact-label { font-size: 12px; font-weight: 600; color: var(--subtitle); }
-.contact-pill { display:inline-flex; align-items:center; padding:10px 16px; border-radius:999px; background:#fff; color:#000; text-decoration:none; font-size:14px; }
-
-.instagram-contact { display:flex; flex-direction:column; gap:8px; align-items:flex-end; text-align:right; }
-.instagram-pill { display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; background:#fff; text-decoration:none; color:inherit; }
-
-.instagram-icon { width:20px; height:20px; }
-.footer .contact-pill, .footer .instagram-pill { white-space: nowrap; }
-
-/* =========================
-   UPDATES / WORK GRID
-========================= */
-.work-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; }
-
-.work-card{
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.04);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 22px 70px rgba(0,0,0,.55);
+.contact-item,
+.instagram-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.work-thumb{ position:relative; aspect-ratio:16/9; overflow:hidden; background:rgba(255,255,255,0.02); }
-.work-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-.badge{ position:absolute; left:12px; top:12px; padding:7px 10px; border-radius:999px; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; font-weight:800; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(10px); }
-
-.work-body{ padding:14px 14px 16px; }
-.work-title{ margin:0 0 6px; font-size:1rem; letter-spacing:-.01em; }
-.work-meta{ margin:0 0 12px; color:rgba(255,255,255,.65); font-size:.9rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.work-actions{ display:flex; gap:10px; flex-wrap:wrap; }
-.work-btn{ display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.92); color:#0b0b0b; text-decoration:none; font-weight:800; font-size:.9rem; }
-.work-btn:hover{ opacity:.92; }
-.work-embed{ padding:14px 14px 0; }
-.work-embed .instagram-media{ margin:0 auto !important; border-radius:18px !important; overflow:hidden !important; background:rgba(255,255,255,.03) !important; }
-
-/* =========================
-   MOVE TALENT + BRANDS UP helpers
-========================= */
-.talent-page p.subtitle{ margin-bottom:1.2rem !important; }
-.talent-page .container{ padding-top:2.5rem !important; padding-bottom:2rem !important; }
-.talent-page .talent-viewport{ margin-top:0 !important; }
-
-.brands-page p.subtitle{ margin-bottom:1.2rem !important; }
-.brands-page .container{ padding-top:2.5rem !important; padding-bottom:2rem !important; }
-.brands-page .brands-page{ margin-top:0 !important; }
-
-/* fallback when :has is supported (keeps layout without editing HTML) */
-@supports selector(.x:has(.y)){
-  .container:has(.talent-viewport){ padding-top:2.5rem !important; padding-bottom:2rem !important; }
-  .container:has(.talent-viewport) p.subtitle{ margin-bottom:1.2rem !important; }
-
-  .container:has(.brands-grid){ padding-top:2.5rem !important; padding-bottom:2rem !important; }
-  .container:has(.brands-grid) p.subtitle{ margin-bottom:1.2rem !important; }
+.contact-label {
+  color: var(--subtitle);
+  font-size: 12px;
+  font-weight: 600;
 }
-/* BRAND MODAL */
-.brand-modal { position: fixed; inset: 0; z-index: 12000; display: flex; align-items: center; justify-content: center; }
+
+.contact-pill,
+.instagram-pill {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+  background: var(--window);
+  color: var(--text);
+
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.instagram-contact {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.instagram-pill {
+  gap: 10px;
+}
+
+.instagram-icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* =========================================================
+   BRAND MODAL
+   ========================================================= */
+
+.brand-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-modal[aria-hidden="true"] {
+  display: none;
+}
+
+.brand-modal[aria-hidden="false"] {
+  display: flex;
+}
+
 .brand-modal-backdrop {
-  width: 100%; height: 100%;
-  background: rgba(11,11,11,0.72);
-  display: flex; align-items: center; justify-content: center;
+  width: 100%;
+  height: 100%;
   padding: 24px;
-  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(11,11,11,.72);
 }
+
 .brand-modal-frame {
   width: min(1100px, 96vw);
   max-height: 88vh;
-  background: transparent;
-  border-radius: 12px;
+
   overflow: hidden;
-  box-shadow: 0 30px 90px rgba(0,0,0,0.6);
-}
-.brand-modal-frame iframe {
-  width: 100%;
-  height: calc(56.25% + 500px); /* fallback; we'll set aspect with JS */
-  min-height: 360px;
-  border: 0;
-  display: block;
+
+  border-radius: 12px;
+  background: transparent;
+
+  box-shadow: 0 30px 90px rgba(0,0,0,.6);
 }
 
-/* close button */
+.brand-modal-frame iframe {
+  display: block;
+
+  width: 100%;
+  height: calc(56.25% + 500px);
+  min-height: 360px;
+
+  border: 0;
+}
+
 .brand-modal-close {
   position: absolute;
-  right: 18px;
   top: 18px;
+  right: 18px;
   z-index: 12001;
-  height: 44px; width: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border: 0;
   border-radius: 999px;
-  background: rgba(255,255,255,0.95);
-  color: #000; font-size: 24px;
-  border: 0; cursor: pointer;
-  display: inline-flex; align-items:center; justify-content:center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
-.brand-modal[aria-hidden="true"]{ display:none; }
-.brand-modal[aria-hidden="false"]{ display:flex;}
 
-/* =========================
-   RESPONSIVE RULES
-========================= */
+  background: #fff;
+  color: #000;
 
-/* medium screens */
-@media (max-width: 980px) {
-  .work-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .container { padding: 2.2rem 1rem; }
+  font-size: 24px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
 }
 
-/* tablet */
-@media (max-width: 820px) {
 
-  /* nav + body spacing */
-  .top-nav { height: 56px; }
-  body { padding-top: 56px !important; }
+/* =========================================================
+   PAGE SPACING
+   ========================================================= */
 
-  .container { padding: 1rem 1rem 1.25rem; max-width: 100%; }
-  header { padding-top: 0.6rem; padding-bottom: 0.4rem; }
-  h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: .25rem; }
-  p.subtitle { margin-bottom: .6rem; max-width: 48ch; }
-
-  /* hero adjustments */
-  .hero { padding-top: .85rem; padding-bottom: 1.25rem; }
-  .hero-overlay { transform: none; padding: 1rem; align-items: flex-start; justify-content: center; }
-  .hero-bubbles { gap: 14px; width: 100%; }
-
-  /* talent: one big card at a time on smaller widths */
-  .talent-vinyl--5 .talent-card { width: 86vw !important; max-width: none !important; height: min(64vh, 520px) !important; aspect-ratio: auto !important; border-radius: 18px; }
-
-  /* bring talent and brands up a touch */
-  .brands-page .brands-grid, .talent-page .talent-viewport { margin-top: 0.25rem !important; }
-
-  /* footer stacking */
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: 18px; padding-left: 1rem; padding-right: 1rem; }
-  .footer .instagram-contact, .footer .contact-right { align-items: flex-start; text-align: left; }
-}
-
-/* phones */
-@media (max-width: 480px) {
-  .container { padding-left: .75rem !important; padding-right: .75rem !important; }
-  .talent-vinyl--5 .talent-card { width: 86vw !important; height: min(72vh, 520px) !important; }
-  /* optional: hide footer on tiny screens to avoid extra vertical scroll */
-  footer { display: none; }
-}
-
-/* reduced-motion preference */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
-}
-
-/* =========================
-   Accessibility / small tweaks
-========================= */
-/* make interactive elements clearly focusable */
-button, a[role="button"], .brand-item { outline: none; }
-button:focus, a:focus, .brand-item:focus { box-shadow: 0 0 0 4px rgba(255,134,0,0.14); outline: none; border-radius: 8px; }
-
-/* helpers to ensure hero copy is readable */
-.hero-bubble, .hero-bubble * { color: inherit; }
-
-/* ensure text blocks inside info cards are visible on mobile */
-.info-card, .work-card, .talent-viewport { -webkit-font-smoothing:antialiased; }
-
-/* ====== Equal top-spacing for Talent / Brands / Latest pages ======
-   Drop this at the end of styles.css (it overrides earlier spacing).
-   Adjust --section-gap to change the spacing globally.
-================================================================== */
-
-:root {
-  --section-gap: 2.2rem; /* change this once to update spacing across pages */
-}
-
-/* Make the page header subtitle spacing consistent */
-header { padding-top: 2.5rem !important; padding-bottom: 0 !important; }
-header p.subtitle,
-.container > header p.subtitle {
-  margin-bottom: var(--section-gap) !important;
-}
-
-/* Target the 3 pages explicitly so it doesn't affect other pages */
 .talent-page .container,
 .brands-page .container,
-.latest-page .container {
-  /* keep container vertical rhythm tighter under the fixed nav */
-  padding-top: 2.5rem !important;
-  padding-bottom: 2rem !important;
-}
-
-/* Make the hint (talent-head) sit the same distance below the carousel as the carousel sits below the header */
-.talent-head {
-  /* remove any accidental offsets and use the shared gap */
-  margin-top: 0 !important;
-  margin-bottom: var(--section-gap) !important;
-  position: relative;
-  z-index: 5;
-}
-
-/* Remove negative offset on the viewport that was creating inconsistent spacing */
-.talent-viewport {
-  margin-top: 0 !important;   /* ensure viewport sits exactly after the gap */
-  padding-top: calc(var(--section-gap) * 0.2) !important; /* tiny breathing room */
-}
-
-/* Make small responsive adjustments so mobile also matches the rhythm */
-@media (max-width: 768px) {
-  :root { --section-gap: 1.3rem; }
-
-  header { padding-top: 1.25rem !important; }
-  header p.subtitle { margin-bottom: var(--section-gap) !important; }
-
-  .talent-head { margin-bottom: calc(var(--section-gap) * 0.6) !important; }
-  .talent-viewport { padding-top: calc(var(--section-gap) * 0.6) !important; }
-}
-
-/* Optional quick rule: make Latest use the same wrapper naming if page class differs */
-.container:has(.brands-grid),
+.latest-page .container,
 .container:has(.talent-viewport),
+.container:has(.brands-grid),
 .container:has(.work-grid) {
   padding-top: 2.5rem !important;
   padding-bottom: 2rem !important;
 }
 
-/* =========================
-   End of stylesheet
-========================= */
+.talent-page p.subtitle,
+.brands-page p.subtitle {
+  margin-bottom: 1.2rem !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 980px) {
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .container {
+    padding: 2.2rem 1rem;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --section-gap: 1.3rem;
+  }
+
+  body {
+    padding-top: 56px !important;
+  }
+
+  .top-nav {
+    height: 56px;
+    gap: 6px;
+  }
+
+  .nav-link {
+    padding: 8px 11px;
+    font-size: .9rem;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  header {
+    padding-top: 1.25rem !important;
+    padding-bottom: .4rem !important;
+  }
+
+  h1 {
+    margin-bottom: .25rem;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+
+  p.subtitle {
+    max-width: 48ch;
+    margin-bottom: var(--section-gap) !important;
+  }
+
+  .hero {
+    padding: .85rem 0 1.25rem;
+  }
+
+  .hero-overlay {
+    padding: 1rem;
+    align-items: flex-start;
+    transform: none;
+  }
+
+  .hero-bubbles {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .talent-head {
+    margin-bottom: calc(var(--section-gap) * .6) !important;
+  }
+
+  .talent-viewport {
+    padding-top: calc(var(--section-gap) * .6) !important;
+  }
+
+  .talent-vinyl--5 .talent-card {
+    width: 86vw !important;
+    max-width: none !important;
+    height: min(64vh, 520px) !important;
+    aspect-ratio: auto !important;
+    border-radius: 18px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .footer .instagram-contact,
+  .footer .contact-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — PHONE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .container {
+    padding-right: .75rem !important;
+    padding-left: .75rem !important;
+  }
+
+  .talent-vinyl--5 .talent-card {
+    width: 86vw !important;
+    height: min(72vh, 520px) !important;
+  }
+
+  footer {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+button,
+a[role="button"],
+.brand-item {
+  outline: none;
+}
+
+button:focus,
+a:focus,
+.brand-item:focus {
+  outline: none;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(255,134,0,.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
