@@ -1107,3 +1107,118 @@ a:focus,
     scroll-behavior: auto !important;
   }
 }
+/* =========================================================
+   FULL-BLEED LATEST PAGE
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  max-width: none;
+}
+
+.latest-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.latest-page .container {
+  width: 100%;
+  max-width: none !important;
+  margin: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.latest-page header {
+  width: 100%;
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Full-width controls */
+.latest-page .updates-controls {
+  width: 100%;
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Full-width work grid */
+.latest-page .work-grid {
+  width: 100%;
+  max-width: none;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Cards themselves use all available column width */
+.latest-page .work-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Instagram embeds must not force the card wider */
+.latest-page .work-embed,
+.latest-page .instagram-media {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Search / controls should not create a constrained central column */
+.latest-page .controls-left,
+.latest-page .controls-right {
+  max-width: none;
+}
+
+/* =========================================================
+   MOBILE — TRUE EDGE TO EDGE
+   ========================================================= */
+
+@media (max-width: 980px) {
+  .latest-page .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .latest-page header,
+  .latest-page .updates-controls {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .latest-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .latest-page .work-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .latest-page header,
+  .latest-page .updates-controls {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .latest-page .work-card {
+    border-radius: 18px;
+  }
+}
