@@ -1,1 +1,41 @@
+name: Update Analytics
 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-analytics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-analytics-data google-auth
+
+      - name: Fetch Google Analytics data
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
+        run: python fetch_analytics.py
+
+      - name: Commit analytics data
+        run: |
+          git config user.name "Brandon Analytics Bot"
+          git config user.email "actions@github.com"
+          git add analytics.json
+          git diff --cached --quiet || git commit -m "Update analytics data"
+          git push
